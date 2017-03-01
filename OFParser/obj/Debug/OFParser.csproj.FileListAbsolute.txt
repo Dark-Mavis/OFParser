@@ -1,0 +1,6 @@
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.exe.config
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.exe
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.pdb
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.csprojResolveAssemblyReference.cache
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.exe
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.pdb

@@ -26,5 +26,26 @@ namespace OFParser
         private bool KmFactor { get; set; }
         private bool rigidInsertsAllowedForFullFc { get; set; }
         private bool plateIncreaseFactorForOverstressedBrg { get; set; }
+        public MiscData(string designCode,bool isFlameRetardant,string MKAPriority,bool TCSheathingStatus,double TCPurlinSpacing,double BCPurlinSpacing,string requestedBraceType,bool loadSharing,bool plasterCeiling,string SY42SquareCutWebCalcs,bool allowBoltsOnGirders,bool SDSScrewsOnGirders,string allowScabsOnTrays,bool empiricalAnalysis,bool compositeFloor,bool KmFactor,bool rigidInsertsAllowedForFullFc,bool plateIncreaseFactorForOverstressedBrg)
+        {
+            designCode = this.designCode;
+            isFlameRetardant = this.isFlameRetardant;
+            MKAPriority = this.MKAPriority;
+            TCSheathingStatus = this.TCSheathingStatus;
+            TCPurlinSpacing = this.TCPurlinSpacing;
+            BCPurlinSpacing = this.BCPurlinSpacing;
+            requestedBraceType = this.requestedBraceType;
+            loadSharing = this.loadSharing;
+            plasterCeiling = this.plasterCeiling;
+            SY42SquareCutWebCalcs = this.SY42SquareCutWebCalcs;
+            allowBoltsOnGirders = this.allowBoltsOnGirders;
+            SDSScrewsOnGirders = this.SDSScrewsOnGirders;
+            allowScabsOnTrays = this.allowScabsOnTrays;
+            empiricalAnalysis = this.empiricalAnalysis;
+            compositeFloor = this.compositeFloor;
+            KmFactor = this.KmFactor;
+            rigidInsertsAllowedForFullFc = this.rigidInsertsAllowedForFullFc;
+            plateIncreaseFactorForOverstressedBrg = this.plateIncreaseFactorForOverstressedBrg;
+        }
     }
 }

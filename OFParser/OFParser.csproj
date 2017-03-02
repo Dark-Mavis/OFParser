@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JointData.cs" />
     <Compile Include="MiscData.cs" />
     <Compile Include="OFParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,44 +8,44 @@ namespace OFParser
 {
     class MiscData
     {
-        private string designCode { get; set; }
-        private bool isFlameRetardant { get; set; }
-        private string MKAPriority { get; set; }
-        private bool TCSheathingStatus { get; set; }
-        private double TCPurlinSpacing { get; set; }
-        private double BCPurlinSpacing { get; set; }
-        private string requestedBraceType { get; set; }
-        private bool loadSharing { get; set; }
-        private bool plasterCeiling { get; set; }
-        private string SY42SquareCutWebCalcs { get; set; }
-        private bool allowBoltsOnGirders { get; set; }
-        private bool SDSScrewsOnGirders { get; set; }
-        private string allowScabsOnTrays { get; set; }
-        private bool empiricalAnalysis { get; set; }
-        private bool compositeFloor { get; set; }
-        private bool KmFactor { get; set; }
-        private bool rigidInsertsAllowedForFullFc { get; set; }
-        private bool plateIncreaseFactorForOverstressedBrg { get; set; }
+        public string DesignCode { get; set; }
+        public bool IsFlameRetardant { get; set; }
+        public string MKAPriority { get; set; }
+        public bool TCSheathingStatus { get; set; }
+        public double TCPurlinSpacing { get; set; }
+        public double BCPurlinSpacing { get; set; }
+        public string RequestedBraceType { get; set; }
+        public bool LoadSharing { get; set; }
+        public bool PlasterCeiling { get; set; }
+        public string SY42SquareCutWebCalcs { get; set; }
+        public bool AllowBoltsOnGirders { get; set; }
+        public bool SDSScrewsOnGirders { get; set; }
+        public string AllowScabsOnTrays { get; set; }
+        public bool EmpiricalAnalysis { get; set; }
+        public bool CompositeFloor { get; set; }
+        public bool KmFactor { get; set; }
+        public bool RigidInsertsAllowedForFullFc { get; set; }
+        public bool PlateIncreaseFactorForOverstressedBrg { get; set; }
         public MiscData(string designCode,bool isFlameRetardant,string MKAPriority,bool TCSheathingStatus,double TCPurlinSpacing,double BCPurlinSpacing,string requestedBraceType,bool loadSharing,bool plasterCeiling,string SY42SquareCutWebCalcs,bool allowBoltsOnGirders,bool SDSScrewsOnGirders,string allowScabsOnTrays,bool empiricalAnalysis,bool compositeFloor,bool KmFactor,bool rigidInsertsAllowedForFullFc,bool plateIncreaseFactorForOverstressedBrg)
         {
-            designCode = this.designCode;
-            isFlameRetardant = this.isFlameRetardant;
-            MKAPriority = this.MKAPriority;
-            TCSheathingStatus = this.TCSheathingStatus;
-            TCPurlinSpacing = this.TCPurlinSpacing;
-            BCPurlinSpacing = this.BCPurlinSpacing;
-            requestedBraceType = this.requestedBraceType;
-            loadSharing = this.loadSharing;
-            plasterCeiling = this.plasterCeiling;
-            SY42SquareCutWebCalcs = this.SY42SquareCutWebCalcs;
-            allowBoltsOnGirders = this.allowBoltsOnGirders;
-            SDSScrewsOnGirders = this.SDSScrewsOnGirders;
-            allowScabsOnTrays = this.allowScabsOnTrays;
-            empiricalAnalysis = this.empiricalAnalysis;
-            compositeFloor = this.compositeFloor;
-            KmFactor = this.KmFactor;
-            rigidInsertsAllowedForFullFc = this.rigidInsertsAllowedForFullFc;
-            plateIncreaseFactorForOverstressedBrg = this.plateIncreaseFactorForOverstressedBrg;
+            this.DesignCode =designCode ;
+            this.IsFlameRetardant = isFlameRetardant;
+            this.MKAPriority = MKAPriority;
+            this.TCSheathingStatus = TCSheathingStatus;
+            this.TCPurlinSpacing = TCPurlinSpacing;
+            this.BCPurlinSpacing = BCPurlinSpacing;
+            this.RequestedBraceType = requestedBraceType;
+            this.LoadSharing = loadSharing;
+            this.PlasterCeiling = plasterCeiling;
+            this.SY42SquareCutWebCalcs = SY42SquareCutWebCalcs;
+            this.AllowBoltsOnGirders = allowBoltsOnGirders;
+            this.SDSScrewsOnGirders = SDSScrewsOnGirders;
+            this.AllowScabsOnTrays = allowScabsOnTrays;
+            this.EmpiricalAnalysis = empiricalAnalysis;
+            this.CompositeFloor = compositeFloor;
+            this.KmFactor = KmFactor;
+            this.RigidInsertsAllowedForFullFc = rigidInsertsAllowedForFullFc;
+            this.PlateIncreaseFactorForOverstressedBrg = plateIncreaseFactorForOverstressedBrg;
         }
     }
 }

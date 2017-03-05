@@ -43,10 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BearingData.cs" />
     <Compile Include="JointData.cs" />
+    <Compile Include="LumberData.cs" />
+    <Compile Include="MemberData.cs" />
     <Compile Include="MiscData.cs" />
     <Compile Include="OFParser.cs" />
+    <Compile Include="PlateData.cs" />
+    <Compile Include="PlateInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualityControlToothCounts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

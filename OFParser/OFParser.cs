@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace OFParser
 {
+    public enum Type
+    {
+        R,
+        F,
+        P,
+        empty
+    }
     class OFParser
     {
         private ArrayList file = new ArrayList();
@@ -17,9 +24,17 @@ namespace OFParser
         public string JobDescription { get; set; }
         public string TrussDescription { get; set; }
         private string[] data;
+        private int location = 0;
 
         public MiscData MiscDataBlock { get; set; }
         public JointData JointDataBlock { get; set; }
+        public PlateInfo PlateInfoBlock { get; set; }
+        public PlateData PlateDataBlock { get; set; }
+        public QualityControlToothCounts QualityControlToothCountsBlock { get; set; }
+        public MemberData MemberDataBlock { get; set; }
+        public LumberData LumberDataBlock { get; set; }
+        public BearingData BearingDataBlock { get; set; }
+
         public OFParser(string location)
         {
             createData(location);
@@ -51,6 +66,13 @@ namespace OFParser
             TrussDescription = data[9].Substring(19);
             miscDataStore(data);
             jointDataStore(data);
+            plateInfoStore(data);
+            plateDataStore(data);
+            //ask matt about the joint# and Node# relation
+            qualityControlStore(data);
+            memberDataStore(data);
+            lumberDataStore(data);
+            bearingDataStore(data);
         }
         private void miscDataStore(string[] data)
         {
@@ -79,7 +101,93 @@ namespace OFParser
             {
                 JointDataBlock.AddNode(data[i]);
             }
+            location = pointer;
         }
+        private void plateInfoStore(string[] data)
+        {
+            location = location + 3;
+            PlateInfoBlock = new PlateInfo(data[location].Substring(30), Convert.ToInt32(data[location + 1].Substring(30)), Convert.ToInt32(data[location + 2].Substring(30)), Convert.ToInt32(data[location + 3].Substring(30)), Convert.ToInt32(data[location + 4].Substring(30)), data[location + 5].Substring(30), data[location + 8].Substring(24), Convert.ToInt32(data[location + 9].Substring(24)), Convert.ToDouble(data[location + 10].Substring(24, 7)), Convert.ToDouble(data[location + 11].Substring(24, 7)), Convert.ToDouble(data[location + 12].Substring(24, 7)), Convert.ToDouble(data[location + 13].Substring(24, 7)));
+        }
+        private void plateDataStore(string[] data)
+        {
+            location = location + 19;
+            int pointer = location;
+            while (data[location] != "")
+            {
+                location++;
+            }
+            PlateDataBlock = new PlateData();
+            for(int i = pointer; i < location; i++)
+            {
+                PlateDataBlock.AddPlate(data[i]);
+            }
+        }
+        private void qualityControlStore(string[] data)
+        {
+            location = location + 4;
+            QualityControlToothCountsBlock = new QualityControlToothCounts();
+            while (data[location] != "")
+            {
+                QualityControlToothCountsBlock.AddJoint(data[location]);
+                location++;
+            }
+        }
+        private void memberDataStore(string[] data)
+        {
+            location = location + 6;
+            MemberDataBlock = new MemberData();
+            while(data[location]!="")
+            {
+                MemberDataBlock.AddMember(data[location]);
+                location++;
+            }
+
+        }
+        private void lumberDataStore(string[] data)
+        {
+            location = location + 5;
+            LumberDataBlock = new LumberData();
+            while (data[location] != "")
+            {
+                //find out how to deal with the double row problem
+                if(data[location].Substring(0,10)=="          ")
+                {
+                    break;
+                }
+                int check = Convert.ToInt32(data[location].Substring(3, 2));
+                while (LumberDataBlock.Lumbers.Count() < check)
+                {
+                    LumberDataBlock.AddNullLumber();
+                }
+                LumberDataBlock.AddLumber(data[location]);
+                location++;
+            }
+        }
+        private void bearingDataStore(string[] data)
+        {
+            location = location + 5;
+            int pointer = location;
+            while(data[pointer].Substring(0,6)!="  Max.")
+            {
+                pointer++;
+            }
+            double MaxProtrusion = Convert.ToDouble(data[pointer].Substring(47));
+            bool OnlyFast = booleanMaker(data[pointer + 1].Substring(56));
+            BearingDataBlock = new BearingData(MaxProtrusion, OnlyFast,JointDataBlock.Nodes.Count());
+            while (location < pointer)
+            {
+                if (BearingDataBlock.Bearings.Count() == Convert.ToInt32(data[location].Substring(4, 2)))
+                {
+                    BearingDataBlock.AddBearing(data[location]);
+                }
+                else
+                {
+                    BearingDataBlock.AddJointToBearing(data[location]);
+                }
+                location++;
+            }
+        }
+
         private bool booleanMaker(string word)
         {
             if (word == "True")

@@ -15,20 +15,23 @@ namespace OFParser
         }
         public void AddNode(string data)
         {
-            data.Trim();
             int pointer = 0;
-            int location = Convert.ToInt32(data[0]);
-            data = data.Substring(1);
-            while(data[pointer]==' ')
+            while(data[0]==' ')
             {
                 data = data.Substring(1);
             }
-            while(data[pointer]!=' ')
+            data = data.Substring(3);
+            while (data[0] == ' ')
+            {
+                data = data.Substring(1);
+            }
+            while (data[pointer]!=' ')
             {
                 pointer++;
             }
             double XCoord = Convert.ToDouble(data.Substring(0, pointer));
             data = data.Substring(pointer);
+            pointer = 0;
             while (data[pointer] == ' ')
             {
                 data = data.Substring(1);
@@ -39,17 +42,14 @@ namespace OFParser
             }
             double YCoord = Convert.ToDouble(data.Substring(0, pointer));
             data = data.Substring(pointer);
+            pointer = 0;
             while (data[pointer] == ' ')
             {
                 data = data.Substring(1);
             }
-            while (data[pointer] != ' ')
-            {
-                pointer++;
-            }
-            int Description = Convert.ToInt32(data.Substring(0, pointer));
+            int Description = Convert.ToInt32(data);
             data = data.Substring(pointer);
-            Nodes[location] = new Node(XCoord, YCoord, Description);
+            Nodes.Add(new Node(XCoord, YCoord, Description));
         }
     }
     class Node

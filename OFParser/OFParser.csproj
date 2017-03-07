@@ -44,7 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BearingData.cs" />
+    <Compile Include="CSIData.cs" />
+    <Compile Include="CSIShearData.cs" />
+    <Compile Include="DefaultLoadingInfo.cs" />
+    <Compile Include="DeflectionData.cs" />
+    <Compile Include="ForceData.cs" />
     <Compile Include="JointData.cs" />
+    <Compile Include="LoadCase.cs" />
     <Compile Include="LumberData.cs" />
     <Compile Include="MemberData.cs" />
     <Compile Include="MiscData.cs" />
@@ -53,6 +59,8 @@
     <Compile Include="PlateInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualityControlToothCounts.cs" />
+    <Compile Include="ReactionData.cs" />
+    <Compile Include="UniformLoads.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

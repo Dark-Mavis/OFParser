@@ -35,6 +35,9 @@ namespace OFParser
         public LumberData LumberDataBlock { get; set; }
         public BearingData BearingDataBlock { get; set; }
 
+        public DefaultLoadingInfo DefaultInfoBlock { get; set; }
+        public List<LoadCase> LoadCases { get; set; }
+
         public OFParser(string location)
         {
             createData(location);
@@ -68,11 +71,13 @@ namespace OFParser
             jointDataStore(data);
             plateInfoStore(data);
             plateDataStore(data);
-            //ask matt about the joint# and Node# relation
             qualityControlStore(data);
             memberDataStore(data);
             lumberDataStore(data);
             bearingDataStore(data);
+
+            defaultLoadingInfoStore(data);
+            loadCases(data);
         }
         private void miscDataStore(string[] data)
         {
@@ -91,22 +96,34 @@ namespace OFParser
         }
         private void jointDataStore(string[] data)
         {
-            int pointer = 35;
-            while (data[pointer] != "")
+            location = 35;
+            while (data[location] != "")
             {
-                pointer++;
+                location++;
             }
             JointDataBlock = new JointData();
-            for(int i = 38; i < pointer; i++)
+            for(int i = 38; i < location; i++)
             {
                 JointDataBlock.AddNode(data[i]);
             }
-            location = pointer;
         }
         private void plateInfoStore(string[] data)
         {
             location = location + 3;
-            PlateInfoBlock = new PlateInfo(data[location].Substring(30), Convert.ToInt32(data[location + 1].Substring(30)), Convert.ToInt32(data[location + 2].Substring(30)), Convert.ToInt32(data[location + 3].Substring(30)), Convert.ToInt32(data[location + 4].Substring(30)), data[location + 5].Substring(30), data[location + 8].Substring(24), Convert.ToInt32(data[location + 9].Substring(24)), Convert.ToDouble(data[location + 10].Substring(24, 7)), Convert.ToDouble(data[location + 11].Substring(24, 7)), Convert.ToDouble(data[location + 12].Substring(24, 7)), Convert.ToDouble(data[location + 13].Substring(24, 7)));
+            string ToothHoldingDescription = data[location].Substring(30);
+            int ToothHoldingName = Convert.ToInt32(data[location + 1].Substring(30));
+            int NumberOfUnplatedJoints = Convert.ToInt32(data[location + 2].Substring(30));
+            int NumberOfTypes = Convert.ToInt32(data[location + 3].Substring(30));
+            int MostCommonPlateType = Convert.ToInt32(data[location + 4].Substring(30));
+            string PlateHandling = data[location + 5].Substring(30);
+
+            string PlateTypeName = data[location + 8].Substring(24);
+            int PlateType = Convert.ToInt32(data[location + 9].Substring(24));
+            double ZeroTension = Convert.ToDouble(data[location + 10].Substring(24, 7));
+            double NinetyTension = Convert.ToDouble(data[location + 11].Substring(24, 7));
+            double ZeroShear = Convert.ToDouble(data[location + 12].Substring(24, 7));
+            double NinetyShear = Convert.ToDouble(data[location + 13].Substring(24, 7));
+            PlateInfoBlock = new PlateInfo(ToothHoldingDescription,ToothHoldingName,NumberOfUnplatedJoints,NumberOfTypes,MostCommonPlateType,PlateHandling,PlateTypeName,PlateType,ZeroTension,NinetyTension,ZeroShear,NinetyShear);
         }
         private void plateDataStore(string[] data)
         {
@@ -146,26 +163,30 @@ namespace OFParser
         private void lumberDataStore(string[] data)
         {
             location = location + 5;
+            bool doubleRow;
             LumberDataBlock = new LumberData();
             while (data[location] != "")
             {
-                //find out how to deal with the double row problem
-                if(data[location].Substring(0,10)=="          ")
-                {
-                    break;
-                }
                 int check = Convert.ToInt32(data[location].Substring(3, 2));
                 while (LumberDataBlock.Lumbers.Count() < check)
                 {
                     LumberDataBlock.AddNullLumber();
                 }
-                LumberDataBlock.AddLumber(data[location]);
-                location++;
+                doubleRow=LumberDataBlock.AddLumber(data[location]);
+                if (doubleRow)
+                {
+                    location++;
+                }
+                else
+                {
+                    LumberDataBlock.AddLumberDoubleRow(data[location], data[location + 1]);
+                    location = location + 2;
+                }
             }
         }
         private void bearingDataStore(string[] data)
         {
-            location = location + 5;
+            location = location + 4;
             int pointer = location;
             while(data[pointer].Substring(0,6)!="  Max.")
             {
@@ -186,6 +207,36 @@ namespace OFParser
                 }
                 location++;
             }
+        }
+        
+        private void defaultLoadingInfoStore(string[] data)
+        {
+            location = location + 7;
+            string Description = data[location].Substring(34);
+            double TCLiveLoad = Convert.ToDouble(data[location + 1].Substring(34, 10));
+            double TCDeadLoad = Convert.ToDouble(data[location + 2].Substring(34, 10));
+            double BCDeadLoad = Convert.ToDouble(data[location + 3].Substring(34, 10));
+            double BCLiveLoad = Convert.ToDouble(data[location + 4].Substring(34, 10));
+            double DurationFactor = Convert.ToDouble(data[location + 5].Substring(34, 10));
+            double Spacing = Convert.ToDouble(data[location + 6].Substring(34, 10));
+            int NumberOfPlys = Convert.ToInt32(data[location + 7].Substring(33, 2));
+            string WindLoading = data[location + 8].Substring(34);
+            DefaultInfoBlock = new DefaultLoadingInfo(Description,TCLiveLoad,TCDeadLoad,BCDeadLoad,BCLiveLoad,DurationFactor,Spacing,NumberOfPlys,WindLoading);
+            location = location + 13;
+        }
+        private void loadCases(string[] data)
+        {
+            LoadCases = new List<LoadCase>();
+            LoadCase current = null;
+            LoadCases.Add(current);
+            while (location < data.Count())
+            {
+                LoadCase cur = new LoadCase(location);
+                location=cur.createData(data);
+                LoadCases.Add(cur);
+                location = location + 3;
+            }
+               
         }
 
         private bool booleanMaker(string word)
@@ -254,7 +305,7 @@ namespace OFParser
         }
         public static void Main(string[] args)
         {
-            OFParser fred = new OFParser("C:/Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T20.OF");
+            OFParser fred = new OFParser("C:/Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T1.OF");
         }
     }
 }

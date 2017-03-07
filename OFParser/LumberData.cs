@@ -28,17 +28,17 @@ namespace OFParser
             Lumber cur = null;
             Lumbers.Add(cur);
         }
-        public void AddLumber(string data)
+        public bool AddLumber(string data)
         {
+            if(data[40]!='1' &&data[40]!='2' && data[40] != '3' && data[40] != '4' && data[40] != '5' && data[40] != '6' && data[40] != '7' && data[40] != '8' && data[40] != '9' && data[40] != '0')
+            {
+                return false;
+            }
             int Grade = Convert.ToInt32(data.Substring(7, 2));
             double Depth = Convert.ToDouble(data.Substring(11,4));
             double Thick = Convert.ToDouble(data.Substring(16, 4));
             int pointer = 39;
             char fun=data[40];
-            if(data[40]!='1' &&data[40]!='2' && data[40] != '3' && data[40] != '4' && data[40] != '5' && data[40] != '6' && data[40] != '7' && data[40] != '8' && data[40] != '9' && data[40] != '0')
-            {
-                return;
-            }
             while(data[pointer]==' ')
             {
                 pointer--;
@@ -53,6 +53,24 @@ namespace OFParser
             MSR MSR = enumMSRCheck(data[75]);
             CW CW = enumCWCheck(data.Substring(77, 3));
             string SizeName = data.Substring(81);
+            Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
+            return true;
+        }
+        public void AddLumberDoubleRow(string data1,string data2)
+        {
+            int Grade = Convert.ToInt32(data1.Substring(7, 2));
+            double Depth = Convert.ToDouble(data1.Substring(11, 4));
+            double Thick = Convert.ToDouble(data1.Substring(16, 4));
+            string Description = data1.Substring(21);
+            double E = scientificNumber(data2.Substring(42, 9));
+            int Fb = Convert.ToInt32(data2.Substring(53, 4));
+            int Fc = Convert.ToInt32(data2.Substring(58, 4));
+            int Ft = Convert.ToInt32(data2.Substring(63, 4));
+            int Fcp = Convert.ToInt32(data2.Substring(68, 4));
+            int Fv = Convert.ToInt32(data2.Substring(73, 4));
+            MSR MSR = enumMSRCheck(data2[77]);
+            CW CW = enumCWCheck(data2.Substring(79, 3));
+            string SizeName = data2.Substring(83);
             Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
         }
         private MSR enumMSRCheck(char check)

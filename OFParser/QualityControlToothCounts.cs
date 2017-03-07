@@ -29,6 +29,11 @@ namespace OFParser
                 cur.AddTeeth(data.Substring(0, 15));
                 data = data.Substring(15);
             }
+            Joint temp = null;
+            while (cur.JointNumber > Joints.Count())
+            {
+                Joints.Add(temp);
+            }
             Joints.Add(cur);
         }
     }

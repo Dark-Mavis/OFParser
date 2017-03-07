@@ -17,15 +17,15 @@ namespace OFParser
         {
             if (check == 'R')
             {
-                return Type.R;
+                return Type.Roll;
             }
             else if (check == 'F')
             {
-                return Type.F;
+                return Type.Fixed;
             }
             else
             {
-                return Type.P;
+                return Type.Pin;
             }
         }
         public void AddMember(string data)

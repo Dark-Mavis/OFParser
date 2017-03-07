@@ -10,9 +10,9 @@ namespace OFParser
 {
     public enum Type
     {
-        R,
-        F,
-        P,
+        Roll,
+        Fixed,
+        Pin,
         empty
     }
     class OFParser

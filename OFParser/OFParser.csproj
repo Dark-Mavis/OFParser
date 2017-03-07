@@ -55,6 +55,7 @@
     <Compile Include="MemberData.cs" />
     <Compile Include="MiscData.cs" />
     <Compile Include="OFParser.cs" />
+    <Compile Include="OFParserTest.cs" />
     <Compile Include="PlateData.cs" />
     <Compile Include="PlateInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

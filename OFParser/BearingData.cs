@@ -43,15 +43,15 @@ namespace OFParser
         {
             if (check == "Roll")
             {
-                return Type.R;
+                return Type.Roll;
             }
             else if (check == "Pin ")
             {
-                return Type.P;
+                return Type.Pin;
             }
             else
             {
-                return Type.F;
+                return Type.Fixed;
             }
         }
     }

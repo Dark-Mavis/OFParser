@@ -15,11 +15,16 @@ namespace OFParser
         }
         public void AddMember(string data)
         {
+            while (Convert.ToInt32(data.Substring(6,2))>Members.Count())
+            {
+                MemberCase cur = null;
+                Members.Add(cur);
+            }
             double AX = Convert.ToDouble(data.Substring(12, 5));
             double BD = Convert.ToDouble(data.Substring(19, 5));
             double Total = Convert.ToDouble(data.Substring(29, 5));
             double LocMax = Convert.ToDouble(data.Substring(40, 5));
-            double Len = Convert.ToDouble(data.Substring(55, 5));
+            double Len = Convert.ToDouble(data.Substring(53, 5));
             double Ke = Convert.ToDouble(data.Substring(63, 6));
             double RAF = Convert.ToDouble(data.Substring(70, 4));
             double RBF = Convert.ToDouble(data.Substring(75));

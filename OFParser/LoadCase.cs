@@ -77,6 +77,10 @@ namespace OFParser
             {
                 deflectionDataStore(data);
             }
+            else
+            {
+                location--;
+            }
             forceDataStore(data);
             return location;
         }

@@ -15,6 +15,11 @@ namespace OFParser
         }
         public void AddMember(string data)
         {
+            while (Convert.ToInt32(data.Substring(6, 2)) > Members.Count())
+            {
+                MemberShear cur = null;
+                Members.Add(cur);
+            }
             double Actual = Convert.ToDouble(data.Substring(14, 6));
             int Allowable = Convert.ToInt32(data.Substring(26, 3));
             double Csi = Convert.ToDouble(data.Substring(33, 5));

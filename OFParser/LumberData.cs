@@ -52,7 +52,12 @@ namespace OFParser
             int Fv = Convert.ToInt32(data.Substring(71, 4));
             MSR MSR = enumMSRCheck(data[75]);
             CW CW = enumCWCheck(data.Substring(77, 3));
-            string SizeName = data.Substring(81);
+            pointer = 81;
+            while(data[pointer]!=' ')
+            {
+                pointer++;
+            }
+            string SizeName = data.Substring(81,pointer-81);
             Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
             return true;
         }
@@ -70,7 +75,12 @@ namespace OFParser
             int Fv = Convert.ToInt32(data2.Substring(73, 4));
             MSR MSR = enumMSRCheck(data2[77]);
             CW CW = enumCWCheck(data2.Substring(79, 3));
-            string SizeName = data2.Substring(83);
+            int pointer = 83;
+            while (data2[pointer] != ' ')
+            {
+                pointer++;
+            }
+            string SizeName = data2.Substring(81, pointer - 83);
             Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
         }
         private MSR enumMSRCheck(char check)

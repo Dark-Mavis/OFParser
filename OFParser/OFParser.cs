@@ -305,7 +305,7 @@ namespace OFParser
         }
         public static void Main(string[] args)
         {
-            OFParser fred = new OFParser("C:/Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T1.OF");
+            OFParser fred = new OFParser("C:/Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T385.OF");
         }
     }
 }

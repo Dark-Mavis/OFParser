@@ -17,10 +17,10 @@ namespace OFParser
         {
             double StartX = Convert.ToDouble(data.Substring(8, 5));
             double StartY = Convert.ToDouble(data.Substring(17, 5));
-            double MagnitudeStart = Convert.ToDouble(data.Substring(27, 5));
+            double MagnitudeStart = Convert.ToDouble(data.Substring(26, 5));
             double EndX = Convert.ToDouble(data.Substring(35, 5));
             double EndY = Convert.ToDouble(data.Substring(42, 5));
-            double MagnitudeEnd = Convert.ToDouble(data.Substring(52, 5));
+            double MagnitudeEnd = Convert.ToDouble(data.Substring(51, 5));
             double LiveLoad = Convert.ToDouble(data.Substring(61));
             Loads.Add(new Load(StartX, StartY, MagnitudeStart, EndX, EndY, MagnitudeEnd, LiveLoad));
         }

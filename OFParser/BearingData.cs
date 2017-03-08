@@ -10,8 +10,7 @@ namespace OFParser
     {
         public List<Bearing> Bearings { get; set; }
         private int jointCount;
-        public double MaxProtrusion { get; set; }
-        //ask Nathan if it's bad to have a name this long
+        public double MaxProtrusionOfSupportingFastener { get; set; }
         public bool OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember { get; set; }
         public BearingData(double MaxProtrusion,bool OnlyFast,int jointCount)
         {
@@ -19,7 +18,7 @@ namespace OFParser
             //ask Nathan about this
             Bearings.Add(null);
             this.jointCount = jointCount;
-            this.MaxProtrusion = MaxProtrusion;
+            this.MaxProtrusionOfSupportingFastener = MaxProtrusion;
             this.OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember = OnlyFast;
         }
         public void AddBearing(string data)

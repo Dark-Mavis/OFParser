@@ -1,8 +1,10 @@
-﻿using System;
+﻿using GeometryClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
@@ -54,6 +56,19 @@ namespace OFParser
     }
     class Node
     {
+        public Point Coordinates
+        {
+            get
+            {
+                return new Point(new Inch(), XCoord, YCoord, 0);
+
+            }
+            set
+            {
+                this.XCoord = value.X.ValueInInches;
+                this.YCoord = value.Y.ValueInInches;
+            }
+        }
         public double XCoord { get; set; }
         public double YCoord { get; set; }
         public int Description { get; set; }
@@ -62,6 +77,7 @@ namespace OFParser
             this.XCoord = XCoord;
             this.YCoord = YCoord;
             this.Description = Description;
+
         }
     }
 }

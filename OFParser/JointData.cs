@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.FootUnit;
 using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
@@ -60,13 +61,13 @@ namespace OFParser
         {
             get
             {
-                return new Point(new Inch(), XCoord, YCoord, 0);
+                return new Point(new Foot(), XCoord, YCoord, 0);
 
             }
             set
             {
-                this.XCoord = value.X.ValueInInches;
-                this.YCoord = value.Y.ValueInInches;
+                this.XCoord = value.X.ValueInFeet;
+                this.YCoord = value.Y.ValueInFeet;
             }
         }
         public double XCoord { get; set; }

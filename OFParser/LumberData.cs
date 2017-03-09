@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DerivedUnits.StressUnit;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
@@ -67,7 +70,7 @@ namespace OFParser
             double Depth = Convert.ToDouble(data1.Substring(11, 4));
             double Thick = Convert.ToDouble(data1.Substring(16, 4));
             string Description = data1.Substring(21);
-            double E = scientificNumber(data2.Substring(42, 9));
+            int E = scientificNumber(data2.Substring(42, 9));
             int Fb = Convert.ToInt32(data2.Substring(53, 4));
             int Fc = Convert.ToInt32(data2.Substring(58, 4));
             int Ft = Convert.ToInt32(data2.Substring(63, 4));
@@ -114,7 +117,7 @@ namespace OFParser
 
             }
         }
-        private double scientificNumber(string numb)
+        private int scientificNumber(string numb)
         {
             double baseNumb = Convert.ToDouble(numb.Substring(0, 4));
             int exp = Convert.ToInt32(numb.Substring(6, 3));
@@ -132,39 +135,127 @@ namespace OFParser
                     baseNumb = baseNumb * 10;
                 }
             }
-            return baseNumb;
+            return (int)baseNumb;
         }
     }
     class Lumber
     {
         public int Grade { get; set; }
-        public double Depth { get; set; }
-        public double Thick { get; set; }
+        public double DepthInches { get; set; }
+        public double ThickInches { get; set; }
         public string Description { get; set; }
-        public double E { get; set; }
-        public int Fb { get; set; }
-        public int Fc { get; set; }
-        public int Ft { get; set; }
-        public int Fcp { get; set; }
-        public int Fv { get; set; }
+        public int EPSI { get; set; }
+        public int FbPSI { get; set; }
+        public int FcPSI { get; set; }
+        public int FtPSI { get; set; }
+        public int FcpPSI { get; set; }
+        public int FvPSI { get; set; }
         public MSR MSR { get; set; }
         public CW CW { get; set; }
         public string SizeName { get; set; }
-        public Lumber(int Grade,double Depth,double Thick,string Description,double E,int Fb,int Fc,int Ft,int Fcp,int Fv,MSR MSR,CW CW,string SizeName)
+        public Lumber(int Grade,double Depth,double Thick,string Description,int E,int Fb,int Fc,int Ft,int Fcp,int Fv,MSR MSR,CW CW,string SizeName)
         {
             this.Grade = Grade;
-            this.Depth = Depth;
-            this.Thick = Thick;
+            this.DepthInches = Depth;
+            this.ThickInches = Thick;
             this.Description = Description;
-            this.E = E;
-            this.Fb = Fb;
-            this.Fc = Fc;
-            this.Ft = Ft;
-            this.Fcp = Fcp;
-            this.Fv = Fv;
+            this.EPSI = E;
+            this.FbPSI = Fb;
+            this.FcPSI = Fc;
+            this.FtPSI = Ft;
+            this.FcpPSI = Fcp;
+            this.FvPSI = Fv;
             this.MSR = MSR;
             this.CW = CW;
             this.SizeName = SizeName;
+        }
+        public Distance Depth
+        {
+            get
+            {
+                return new Distance(new Inch(), this.DepthInches);
+            }
+            set
+            {
+                this.DepthInches = value.ValueInInches;
+            }
+        }
+        public Distance Thick
+        {
+            get
+            {
+                return new Distance(new Inch(), this.ThickInches);
+            }
+            set
+            {
+                this.ThickInches = value.ValueInInches;
+            }
+        }
+        public Stress E
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), EPSI);
+            }
+            set
+            {
+                this.EPSI = (int)value.InPSI.Value;
+            }
+        }
+        public Stress Fb
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), FbPSI);
+            }
+            set
+            {
+                this.FbPSI = (int)value.InPSI.Value;
+            }
+        }
+        public Stress Fc
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), FcPSI);
+            }
+            set
+            {
+                this.FcPSI = (int)value.InPSI.Value;
+            }
+        }
+        public Stress Ft
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), FtPSI);
+            }
+            set
+            {
+                this.FtPSI = (int)value.InPSI.Value;
+            }
+        }
+        public Stress Fcp
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), FcpPSI);
+            }
+            set
+            {
+                this.FcpPSI = (int)value.InPSI.Value;
+            }
+        }
+        public Stress Fv
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareInch(), FvPSI);
+            }
+            set
+            {
+                this.FvPSI = (int)value.InPSI.Value;
+            }
         }
     }
 }

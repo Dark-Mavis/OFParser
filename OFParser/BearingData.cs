@@ -1,8 +1,12 @@
-﻿using System;
+﻿using GeometryClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.FootUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
@@ -57,7 +61,7 @@ namespace OFParser
     class Bearing
     {
         public List<Type> Joints { get; set; }
-        public double Width { get; set; }
+        public double WidthInches { get; set; }
         public double XCoord { get; set; }
         public double YCoord { get; set; }
         public int BearingType { get; set; }
@@ -69,7 +73,7 @@ namespace OFParser
             {
                 Joints.Add(Type.empty);
             }
-            this.Width = Width;
+            this.WidthInches = Width;
             this.XCoord = XCoord;
             this.YCoord = YCoord;
             this.BearingType = BearingType;
@@ -78,6 +82,29 @@ namespace OFParser
         public void AddJoint(Type Type,int location)
         {
             Joints[location] = Type;
+        }
+        public Point Coordinates
+        {
+            get
+            {
+                return new Point(new Distance(new Foot(), this.XCoord), new Distance(new Foot(), this.YCoord));
+            }
+            set
+            {
+                this.XCoord = value.X.ValueInFeet;
+                this.YCoord = value.Y.ValueInFeet;
+            }
+        }
+        public Distance Width
+        {
+            get
+            {
+                return new Distance(new Inch(), this.WidthInches);
+            }
+            set
+            {
+                this.WidthInches = value.ValueInInches;
+            }
         }
     }
 }

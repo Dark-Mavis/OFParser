@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.FootUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
@@ -36,8 +39,8 @@ namespace OFParser
         public double AX { get; set; }
         public double BD { get; set; }
         public double Total { get; set; }
-        public double LocMax { get; set; }
-        public double Len { get; set; }
+        public double LocMaxFeet { get; set; }
+        public double LenInches { get; set; }
         public double Ke { get; set; }
         public double RAF { get; set; }
         public double RBF { get; set; }
@@ -46,11 +49,33 @@ namespace OFParser
             this.AX = AX;
             this.BD = BD;
             this.Total = Total;
-            this.LocMax = LocMax;
-            this.Len = Len;
+            this.LocMaxFeet = LocMax;
+            this.LenInches = Len;
             this.Ke = Ke;
             this.RAF = RAF;
             this.RBF = RBF;
+        }
+        public Distance LocalMax
+        {
+            get
+            {
+                return new Distance(new Foot(), this.LocMaxFeet);
+            }
+            set
+            {
+                this.LocMaxFeet = value.ValueInFeet;
+            }
+        }
+        public Distance Length
+        {
+            get
+            {
+                return new Distance(new Inch(), this.LenInches);
+            }
+            set
+            {
+                this.LenInches = value.ValueInInches;
+            }
         }
     }
 }

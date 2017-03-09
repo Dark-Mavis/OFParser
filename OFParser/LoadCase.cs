@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DerivedUnits.StressUnit;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.FootUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.MileUnit;
+using UnitClassLibrary.SpeedUnit;
+using UnitClassLibrary.SpeedUnit.SpeedTypes;
 
 namespace OFParser
 {
     class LoadCase
     {
         public string LoadCaseType { get; set; }
-        public double Spacing { get; set; }
+        public double SpacingFeet { get; set; }
         public double DurationFactor { get; set; }
         public double PlateDurationFactor { get; set; }
         public int NumberOfPlys { get; set; }
         public bool UserModifiedLoads { get; set; }
         public int KindOfLoadCase { get; set; }
         public bool RepetitiveFactorsUsed { get; set; }
-        public double SoffitDeadLoad { get; set; }
+        public double SoffitDeadLoadPSF { get; set; }
         public ExtraInfo ExtraInfoBlock { get; set; }
         private int location;
 
@@ -31,17 +37,40 @@ namespace OFParser
         {
             location = locationin;
         }
+        public Distance Spacing
+        {
+            get
+            {
+                return new Distance(new Foot(), this.SpacingFeet);
+            }
+            set
+            {
+                this.SpacingFeet = value.ValueInFeet;
+            }
+        }
+        /*
+        public Stress SoffitDeadLoad
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareFoot(), this.SoffitDeadLoadPSF);
+            }
+            set
+            {
+                this.SoffitDeadLoadPSF = value.InPSI.Value;
+            }
+        }*/
         public int createData(string[] data)
         {
             LoadCaseType = data[location].Substring(10);
-            Spacing = Convert.ToDouble(data[location+1].Substring(31, 4));
+            SpacingFeet = Convert.ToDouble(data[location+1].Substring(31, 4));
             DurationFactor = Convert.ToDouble(data[location+2].Substring(31, 4));
             PlateDurationFactor = Convert.ToDouble(data[location + 3].Substring(31, 4));
             NumberOfPlys = Convert.ToInt32(data[location + 4].Substring(31));
             UserModifiedLoads = booleanMaker(data[location + 5].Substring(31));
             KindOfLoadCase = Convert.ToInt32(data[location + 6].Substring(31));
             RepetitiveFactorsUsed = booleanMaker(data[location + 7].Substring(31));
-            SoffitDeadLoad = Convert.ToDouble(data[location + 8].Substring(30, 4));
+            SoffitDeadLoadPSF = Convert.ToDouble(data[location + 8].Substring(30, 4));
             location = location + 9;
             if (data[location] != "")
             {
@@ -188,11 +217,11 @@ namespace OFParser
         public string LoadCaseName { get; set; }
         public string ExposureType { get; set; }
         public string BuildingClass { get; set; }
-        public double WindSpeed { get; set; }
+        public double WindSpeedMPH { get; set; }
         public string BuildingType { get; set; }
-        public double DLTop { get; set; }
-        public double DLBottom { get; set; }
-        public double Height { get; set; }
+        public double DLTopPSF { get; set; }
+        public double DLBottomPSF { get; set; }
+        public double HeightFt { get; set; }
         public bool Ceiling { get; set; }
         public bool Zone1 { get; set; }
         public bool Zone2 { get; set; }
@@ -203,16 +232,41 @@ namespace OFParser
             this.LoadCaseName = LoadCaseName;
             this.ExposureType = ExposureType;
             this.BuildingClass = BuildingClass;
-            this.WindSpeed = WindSpeed;
+            this.WindSpeedMPH = WindSpeed;
             this.BuildingType = BuildingType;
-            this.DLTop = DLTop;
-            this.DLBottom = DLBottom;
-            this.Height = Height;
+            this.DLTopPSF = DLTop;
+            this.DLBottomPSF = DLBottom;
+            this.HeightFt = Height;
             this.Ceiling = Ceiling;
             this.Zone1 = Zone1;
             this.Zone2 = Zone2;
             this.Uplifts1 = Uplifts1;
             this.Uplifts2 = Uplifts2;
+        }
+       /* public Speed WindSpeed
+        {
+            get
+            {
+                return new Speed(new MilePerHour(),
+            }
+        }
+        public Stress DLTop
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareFoot(), this.DLTopPSF);
+            }
+        }*/
+        public Distance Height
+        {
+            get
+            {
+                return new Distance(new Foot(), this.HeightFt);
+            }
+            set
+            {
+                this.HeightFt = value.ValueInFeet;
+            }
         }
     }
 }

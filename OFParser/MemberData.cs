@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
@@ -37,7 +39,7 @@ namespace OFParser
             Type Type = enumChecker(data[39]);
             int AssociatedPieceNumber = Convert.ToInt32(data.Substring(46, 2));
             int LumberNumber = Convert.ToInt32(data.Substring(55, 2));
-            int PurlinSpacing = Convert.ToInt32(data.Substring(64, 2));
+            double PurlinSpacing = Convert.ToDouble(data.Substring(64, 2));
             Members.Add(new Member(NegativeJoint, NegEndFix, PositiveJoint, PosEndFix, Type, AssociatedPieceNumber, LumberNumber, PurlinSpacing));
         }
     }
@@ -50,8 +52,9 @@ namespace OFParser
         public Type Type { get; set; }
         public int AssociatedPieceNumber { get; set; }
         public int LumberNumber { get; set; }
-        public int PurlinSpacing { get; set; }
-        public Member(int NegativeJoint,int NegEndFix,int PositiveJoint,int PosEndFix, Type Type,int AssociatedPieceNumber,int LumberNumber,int PurlinSpacing)
+        //what is purlin spacing?
+        public double PurlinSpacingInches { get; set; }
+        public Member(int NegativeJoint,int NegEndFix,int PositiveJoint,int PosEndFix, Type Type,int AssociatedPieceNumber,int LumberNumber,double PurlinSpacing)
         {
             this.NegativeJoint = NegativeJoint;
             this.NegEndFix = NegEndFix;
@@ -60,7 +63,18 @@ namespace OFParser
             this.Type = Type;
             this.AssociatedPieceNumber = AssociatedPieceNumber;
             this.LumberNumber = LumberNumber;
-            this.PurlinSpacing = PurlinSpacing;
+            this.PurlinSpacingInches = PurlinSpacing;
+        }
+        public Distance PurlinSpacing
+        {
+            get
+            {
+                return new Distance(new Inch(), this.PurlinSpacingInches);
+            }
+            set
+            {
+                this.PurlinSpacingInches = value.ValueInInches;
+            }
         }
     }
 }

@@ -224,7 +224,7 @@ namespace OFParser
             Assert.AreEqual(Type.Roll, T20.MemberDataBlock.Members[4].Type);
             Assert.AreEqual(3, T20.MemberDataBlock.Members[5].AssociatedPieceNumber);
             Assert.AreEqual(7, T20.MemberDataBlock.Members[6].LumberNumber);
-            Assert.AreEqual(-1, T20.MemberDataBlock.Members[7].PurlinSpacing);
+            Assert.AreEqual(-1, T20.MemberDataBlock.Members[7].PurlinSpacingInches);
         }
         [Test]
         public void T1MemberDataTest()
@@ -236,7 +236,7 @@ namespace OFParser
             Assert.AreEqual(Type.Roll, T1.MemberDataBlock.Members[4].Type);
             Assert.AreEqual(1, T1.MemberDataBlock.Members[5].AssociatedPieceNumber);
             Assert.AreEqual(8, T1.MemberDataBlock.Members[6].LumberNumber);
-            Assert.AreEqual(0, T1.MemberDataBlock.Members[7].PurlinSpacing);
+            Assert.AreEqual(0, T1.MemberDataBlock.Members[7].PurlinSpacingInches);
         }
         [Test]
         public void T385MemberDataTest()
@@ -248,21 +248,21 @@ namespace OFParser
             Assert.AreEqual(Type.Roll, T385.MemberDataBlock.Members[4].Type);
             Assert.AreEqual(4, T385.MemberDataBlock.Members[5].AssociatedPieceNumber);
             Assert.AreEqual(17, T385.MemberDataBlock.Members[6].LumberNumber);
-            Assert.AreEqual(0, T385.MemberDataBlock.Members[7].PurlinSpacing);
+            Assert.AreEqual(0, T385.MemberDataBlock.Members[7].PurlinSpacingInches);
         }
         [Test]
         public void T20LumberDataTest()
         {
             Assert.AreEqual(7, T20.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T20.LumberDataBlock.Lumbers[7].Depth);
-            Assert.AreEqual(1.50, T20.LumberDataBlock.Lumbers[17].Thick);
+            Assert.AreEqual(3.50, T20.LumberDataBlock.Lumbers[7].DepthInches);
+            Assert.AreEqual(1.50, T20.LumberDataBlock.Lumbers[17].ThickInches);
             Assert.AreEqual("STACKED CHORD FICT MEMBER", T20.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T20.LumberDataBlock.Lumbers[17].E);
-            Assert.AreEqual(1100, T20.LumberDataBlock.Lumbers[7].Fb);
-            Assert.AreEqual(850, T20.LumberDataBlock.Lumbers[6].Fc);
-            Assert.AreEqual(675, T20.LumberDataBlock.Lumbers[7].Ft);
-            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[17].Fcp);
-            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[18].Fv);
+            Assert.AreEqual(1000000, T20.LumberDataBlock.Lumbers[17].EPSI);
+            Assert.AreEqual(1100, T20.LumberDataBlock.Lumbers[7].FbPSI);
+            Assert.AreEqual(850, T20.LumberDataBlock.Lumbers[6].FcPSI);
+            Assert.AreEqual(675, T20.LumberDataBlock.Lumbers[7].FtPSI);
+            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[17].FcpPSI);
+            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[18].FvPSI);
             Assert.AreEqual(MSR.F, T20.LumberDataBlock.Lumbers[17].MSR);
             Assert.AreEqual(CW.CW, T20.LumberDataBlock.Lumbers[7].CW);
             Assert.AreEqual("2x4", T20.LumberDataBlock.Lumbers[6].SizeName);
@@ -271,15 +271,15 @@ namespace OFParser
         public void T1LumberDataTest()
         {
             Assert.AreEqual(7, T1.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T1.LumberDataBlock.Lumbers[8].Depth);
-            Assert.AreEqual(1.50, T1.LumberDataBlock.Lumbers[17].Thick);
+            Assert.AreEqual(3.50, T1.LumberDataBlock.Lumbers[8].DepthInches);
+            Assert.AreEqual(1.50, T1.LumberDataBlock.Lumbers[17].ThickInches);
             Assert.AreEqual("STACKED CHORD FICT MEMBER", T1.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T1.LumberDataBlock.Lumbers[17].E);
-            Assert.AreEqual(1500, T1.LumberDataBlock.Lumbers[8].Fb);
-            Assert.AreEqual(850, T1.LumberDataBlock.Lumbers[6].Fc);
-            Assert.AreEqual(1000, T1.LumberDataBlock.Lumbers[8].Ft);
-            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[17].Fcp);
-            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[18].Fv);
+            Assert.AreEqual(1000000, T1.LumberDataBlock.Lumbers[17].EPSI);
+            Assert.AreEqual(1500, T1.LumberDataBlock.Lumbers[8].FbPSI);
+            Assert.AreEqual(850, T1.LumberDataBlock.Lumbers[6].FcPSI);
+            Assert.AreEqual(1000, T1.LumberDataBlock.Lumbers[8].FtPSI);
+            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[17].FcpPSI);
+            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[18].FvPSI);
             Assert.AreEqual(MSR.F, T1.LumberDataBlock.Lumbers[17].MSR);
             Assert.AreEqual(CW.CW, T1.LumberDataBlock.Lumbers[8].CW);
             Assert.AreEqual("2x4", T1.LumberDataBlock.Lumbers[6].SizeName);
@@ -288,15 +288,15 @@ namespace OFParser
         public void T385LumberDataTest()
         {
             Assert.AreEqual(7, T385.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T385.LumberDataBlock.Lumbers[7].Depth);
-            Assert.AreEqual(1.50, T385.LumberDataBlock.Lumbers[17].Thick);
+            Assert.AreEqual(3.50, T385.LumberDataBlock.Lumbers[7].DepthInches);
+            Assert.AreEqual(1.50, T385.LumberDataBlock.Lumbers[17].ThickInches);
             Assert.AreEqual("STACKED CHORD FICT MEMBER", T385.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T385.LumberDataBlock.Lumbers[17].E);
-            Assert.AreEqual(1100, T385.LumberDataBlock.Lumbers[7].Fb);
-            Assert.AreEqual(850, T385.LumberDataBlock.Lumbers[6].Fc);
-            Assert.AreEqual(675, T385.LumberDataBlock.Lumbers[7].Ft);
-            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[17].Fcp);
-            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[18].Fv);
+            Assert.AreEqual(1000000, T385.LumberDataBlock.Lumbers[17].EPSI);
+            Assert.AreEqual(1100, T385.LumberDataBlock.Lumbers[7].FbPSI);
+            Assert.AreEqual(850, T385.LumberDataBlock.Lumbers[6].FcPSI);
+            Assert.AreEqual(675, T385.LumberDataBlock.Lumbers[7].FtPSI);
+            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[17].FcpPSI);
+            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[18].FvPSI);
             Assert.AreEqual(MSR.F, T385.LumberDataBlock.Lumbers[17].MSR);
             Assert.AreEqual(CW.CW, T385.LumberDataBlock.Lumbers[7].CW);
             Assert.AreEqual("2x4", T385.LumberDataBlock.Lumbers[6].SizeName);
@@ -305,7 +305,7 @@ namespace OFParser
         public void T20BearingDataTest()
         {
             Assert.AreEqual(Type.Pin, T20.BearingDataBlock.Bearings[1].Joints[0]);
-            Assert.AreEqual(1.594, T20.BearingDataBlock.Bearings[2].Width);
+            Assert.AreEqual(1.594, T20.BearingDataBlock.Bearings[2].WidthInches);
             Assert.AreEqual(0, T20.BearingDataBlock.Bearings[1].XCoord);
             Assert.AreEqual(39.651, T20.BearingDataBlock.Bearings[2].YCoord);
             Assert.AreEqual(2, T20.BearingDataBlock.Bearings[1].BearingType);
@@ -317,7 +317,7 @@ namespace OFParser
         public void T1BearingDataTest()
         {
             Assert.AreEqual(Type.Pin, T1.BearingDataBlock.Bearings[1].Joints[1]);
-            Assert.AreEqual(1.500, T1.BearingDataBlock.Bearings[2].Width);
+            Assert.AreEqual(1.500, T1.BearingDataBlock.Bearings[2].WidthInches);
             Assert.AreEqual(0, T1.BearingDataBlock.Bearings[1].XCoord);
             Assert.AreEqual(29.792, T1.BearingDataBlock.Bearings[2].YCoord);
             Assert.AreEqual(2, T1.BearingDataBlock.Bearings[1].BearingType);
@@ -329,7 +329,7 @@ namespace OFParser
         public void T385BearingDataTest()
         {
             Assert.AreEqual(Type.Roll, T385.BearingDataBlock.Bearings[1].Joints[2]);
-            Assert.AreEqual(1.500, T385.BearingDataBlock.Bearings[1].Width);
+            Assert.AreEqual(1.500, T385.BearingDataBlock.Bearings[1].WidthInches);
             Assert.AreEqual(0, T385.BearingDataBlock.Bearings[1].XCoord);
             Assert.AreEqual(32.163, T385.BearingDataBlock.Bearings[1].YCoord);
             Assert.AreEqual(2, T385.BearingDataBlock.Bearings[1].BearingType);
@@ -342,24 +342,24 @@ namespace OFParser
         public void T20Case1LoadingDataTest()
         {
             Assert.AreEqual("STD.AUTO.LOAD", T20.LoadCases[1].LoadCaseType);
-            Assert.AreEqual(2.00, T20.LoadCases[1].Spacing);
+            Assert.AreEqual(2.00, T20.LoadCases[1].SpacingFeet);
             Assert.AreEqual(1.25, T20.LoadCases[1].DurationFactor);
             Assert.AreEqual(1.25, T20.LoadCases[1].PlateDurationFactor);
             Assert.AreEqual(1, T20.LoadCases[1].NumberOfPlys);
             Assert.AreEqual(false, T20.LoadCases[1].UserModifiedLoads);
             Assert.AreEqual(1, T20.LoadCases[1].KindOfLoadCase);
             Assert.AreEqual(true, T20.LoadCases[1].RepetitiveFactorsUsed);
-            Assert.AreEqual(2.00, T20.LoadCases[1].SoffitDeadLoad);
+            Assert.AreEqual(2.00, T20.LoadCases[1].SoffitDeadLoadPSF);
         }
         [Test]
         public void T1Case2UniformLoadsTest()
         {
-            Assert.AreEqual(0, T1.LoadCases[2].UniformLoadsBlock.Loads[0].StartX);
-            Assert.AreEqual(38.55, T1.LoadCases[2].UniformLoadsBlock.Loads[1].StartY);
-            Assert.AreEqual(4.0, T1.LoadCases[2].UniformLoadsBlock.Loads[2].MagnitudeStart);
-            Assert.AreEqual(15.19, T1.LoadCases[2].UniformLoadsBlock.Loads[3].EndX);
-            Assert.AreEqual(24.79, T1.LoadCases[2].UniformLoadsBlock.Loads[2].EndY);
-            Assert.AreEqual(7.7, T1.LoadCases[2].UniformLoadsBlock.Loads[1].MagnitudeEnd);
+            Assert.AreEqual(0, T1.LoadCases[2].UniformLoadsBlock.Loads[0].StartXFeet);
+            Assert.AreEqual(38.55, T1.LoadCases[2].UniformLoadsBlock.Loads[1].StartYFeet);
+            Assert.AreEqual(4.0, T1.LoadCases[2].UniformLoadsBlock.Loads[2].MagnitudeStartPLF);
+            Assert.AreEqual(15.19, T1.LoadCases[2].UniformLoadsBlock.Loads[3].EndXFeet);
+            Assert.AreEqual(24.79, T1.LoadCases[2].UniformLoadsBlock.Loads[2].EndYFeet);
+            Assert.AreEqual(7.7, T1.LoadCases[2].UniformLoadsBlock.Loads[1].MagnitudeEndPLF);
             Assert.AreEqual(0, T1.LoadCases[2].UniformLoadsBlock.Loads[0].LiveLoad);
         }
         [Test]
@@ -379,8 +379,8 @@ namespace OFParser
             Assert.AreEqual(0.015, T20.LoadCases[4].CSIDataBlock.Members[0].AX);
             Assert.AreEqual(0.147, T20.LoadCases[4].CSIDataBlock.Members[1].BD);
             Assert.AreEqual(0.062, T20.LoadCases[4].CSIDataBlock.Members[2].Total);
-            Assert.AreEqual(10.85, T20.LoadCases[4].CSIDataBlock.Members[3].LocMax);
-            Assert.AreEqual(56.41, T20.LoadCases[4].CSIDataBlock.Members[4].Len);
+            Assert.AreEqual(10.85, T20.LoadCases[4].CSIDataBlock.Members[3].LocMaxFeet);
+            Assert.AreEqual(56.41, T20.LoadCases[4].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(0.7408, T20.LoadCases[4].CSIDataBlock.Members[5].Ke);
             Assert.AreEqual(1.00, T20.LoadCases[4].CSIDataBlock.Members[6].RAF);
             Assert.AreEqual(1.00, T20.LoadCases[4].CSIDataBlock.Members[7].RBF);
@@ -397,65 +397,65 @@ namespace OFParser
         public void T385Case6DeflectionPPDataTest()
         {
             Assert.AreEqual("PB", T385.LoadCases[6].DeflectionPPDataBlock.Deflects[0].Label);
-            Assert.AreEqual(0.15, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[1].XLocation);
-            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[2].LiveLoadX);
-            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[3].LiveLoadY);
+            Assert.AreEqual(0.15, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[1].XLocationFeet);
+            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[2].LiveLoadXInches);
+            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[3].LiveLoadYInches);
             Assert.AreEqual(0.27, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[4].Allow);
-            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[5].DeadLoadX);
-            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[6].DeadLoadY);
-            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[7].TotalLoadsX);
-            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[6].TotalLoadsY);
+            Assert.AreEqual(-0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[5].DeadLoadXInches);
+            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[6].DeadLoadYInches);
+            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[7].TotalLoadXInches);
+            Assert.AreEqual(0.00, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[6].TotalLoadYInches);
             Assert.AreEqual(0.40, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[5].AllowTotal);
-            Assert.AreEqual(7.96, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[4].Span);
+            Assert.AreEqual(7.96, T385.LoadCases[6].DeflectionPPDataBlock.Deflects[4].SpanFeet);
         }
         [Test]
         public void T20Case7DeflectionMPDataTest()
         {
             Assert.AreEqual("TC", T20.LoadCases[7].DeflectionMPDataBlock.Deflects[0].Label);
-            Assert.AreEqual(3.74, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[1].XLocation);
-            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[2].LiveLoadX);
-            Assert.AreEqual(0.03, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[3].LiveLoadY);
+            Assert.AreEqual(3.74, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[1].XLocationFeet);
+            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[2].LiveLoadXInches);
+            Assert.AreEqual(0.03, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[3].LiveLoadYInches);
             Assert.AreEqual(0.24, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[4].Allow);
-            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[5].DeadLoadX);
-            Assert.AreEqual(0.04, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[6].DeadLoadY);
-            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[7].TotalLoadsX);
-            Assert.AreEqual(-0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[8].TotalLoadsY);
+            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[5].DeadLoadXInches);
+            Assert.AreEqual(0.04, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[6].DeadLoadYInches);
+            Assert.AreEqual(0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[7].TotalLoadXInches);
+            Assert.AreEqual(-0.00, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[8].TotalLoadYInches);
             Assert.AreEqual(0.03, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[9].AllowTotal);
-            Assert.AreEqual(0.29, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[10].Span);
+            Assert.AreEqual(0.29, T20.LoadCases[7].DeflectionMPDataBlock.Deflects[10].SpanFeet);
         }
         [Test]
         public void T1Case8ForceDataTest()
         {
             Assert.AreEqual(341.97, T1.LoadCases[8].ForceDataBlock.Members[0].NegativeEndAxialNumber);
             Assert.AreEqual(208.03, T1.LoadCases[8].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(1304.22, T1.LoadCases[8].ForceDataBlock.Members[2].NegativeEndMoment);
+            Assert.AreEqual(1304.22, T1.LoadCases[8].ForceDataBlock.Members[2].NegativeMomentLBS);
             Assert.AreEqual(0.00, T1.LoadCases[8].ForceDataBlock.Members[3].PositiveEndAxialNumber);
             Assert.AreEqual(76.77, T1.LoadCases[8].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-564.56, T1.LoadCases[8].ForceDataBlock.Members[5].PositiveEndMoment);
+            Assert.AreEqual(-564.56, T1.LoadCases[8].ForceDataBlock.Members[5].PositiveMomentLBS);
         }
 
         [Test]
         public void T385Case10LoadingDataTest()
         {
             Assert.AreEqual("MWFRS ASCE Perp/R+-", T385.LoadCases[10].LoadCaseType);
-            Assert.AreEqual(2.00, T385.LoadCases[10].Spacing);
+            Assert.AreEqual(2.00, T385.LoadCases[10].SpacingFeet);
             Assert.AreEqual(1.60, T385.LoadCases[10].DurationFactor);
             Assert.AreEqual(1.60, T385.LoadCases[10].PlateDurationFactor);
             Assert.AreEqual(1, T385.LoadCases[10].NumberOfPlys);
             Assert.AreEqual(false, T385.LoadCases[10].UserModifiedLoads);
             Assert.AreEqual(6, T385.LoadCases[10].KindOfLoadCase);
             Assert.AreEqual(true, T385.LoadCases[10].RepetitiveFactorsUsed);
-            Assert.AreEqual(2.00, T385.LoadCases[10].SoffitDeadLoad);
+            Assert.AreEqual(2.00, T385.LoadCases[10].SoffitDeadLoadPSF);
         }
         [Test]
         public void T20Case11UniformLoadsTest()
         {
-            Assert.AreEqual(0, T20.LoadCases[11].UniformLoadsBlock.Loads[0].StartX);
-            Assert.AreEqual(46.52, T20.LoadCases[11].UniformLoadsBlock.Loads[1].StartY);
-            Assert.AreEqual(24.0, T20.LoadCases[11].UniformLoadsBlock.Loads[2].MagnitudeStart);
-            Assert.AreEqual(8.59, T20.LoadCases[11].UniformLoadsBlock.Loads[3].EndX);
-            Assert.AreEqual(46.52, T20.LoadCases[11].UniformLoadsBlock.Loads[4].EndY);
-            Assert.AreEqual(20, T20.LoadCases[11].UniformLoadsBlock.Loads[5].MagnitudeEnd);
+            Assert.AreEqual(0, T20.LoadCases[11].UniformLoadsBlock.Loads[0].StartXFeet);
+            Assert.AreEqual(46.52, T20.LoadCases[11].UniformLoadsBlock.Loads[1].StartYFeet);
+            Assert.AreEqual(24.0, T20.LoadCases[11].UniformLoadsBlock.Loads[2].MagnitudeStartPLF);
+            Assert.AreEqual(8.59, T20.LoadCases[11].UniformLoadsBlock.Loads[3].EndXFeet);
+            Assert.AreEqual(46.52, T20.LoadCases[11].UniformLoadsBlock.Loads[4].EndYFeet);
+            Assert.AreEqual(20, T20.LoadCases[11].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
             Assert.AreEqual(1, T20.LoadCases[11].UniformLoadsBlock.Loads[4].LiveLoad);
         }
         [Test]
@@ -475,8 +475,8 @@ namespace OFParser
             Assert.AreEqual(0, T385.LoadCases[13].CSIDataBlock.Members[0].AX);
             Assert.AreEqual(0.023, T385.LoadCases[13].CSIDataBlock.Members[1].BD);
             Assert.AreEqual(0.020, T385.LoadCases[13].CSIDataBlock.Members[2].Total);
-            Assert.AreEqual(1.7, T385.LoadCases[13].CSIDataBlock.Members[3].LocMax);
-            Assert.AreEqual(7.29, T385.LoadCases[13].CSIDataBlock.Members[4].Len);
+            Assert.AreEqual(1.7, T385.LoadCases[13].CSIDataBlock.Members[3].LocMaxFeet);
+            Assert.AreEqual(7.29, T385.LoadCases[13].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(.731, T385.LoadCases[13].CSIDataBlock.Members[5].Ke);
             Assert.AreEqual(1.1, T385.LoadCases[13].CSIDataBlock.Members[7].RAF);
             Assert.AreEqual(1.15, T385.LoadCases[13].CSIDataBlock.Members[10].RBF);
@@ -493,55 +493,55 @@ namespace OFParser
         public void T1Case15DeflectionPPDataTest()
         {
             Assert.AreEqual("PT", T1.LoadCases[15].DeflectionPPDataBlock.Deflects[0].Label);
-            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[1].XLocation);
-            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[2].LiveLoadX);
-            Assert.AreEqual(-0.01, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[3].LiveLoadY);
+            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[1].XLocationFeet);
+            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[2].LiveLoadXInches);
+            Assert.AreEqual(-0.01, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[3].LiveLoadYInches);
             Assert.AreEqual(.42, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[4].Allow);
-            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[5].DeadLoadX);
-            Assert.AreEqual(-0.02, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[6].DeadLoadY);
-            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[7].TotalLoadsX);
-            Assert.AreEqual(-0.02, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[8].TotalLoadsY);
+            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[5].DeadLoadXInches);
+            Assert.AreEqual(-0.02, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[6].DeadLoadYInches);
+            Assert.AreEqual(0, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[7].TotalLoadXInches);
+            Assert.AreEqual(-0.02, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[8].TotalLoadYInches);
             Assert.AreEqual(.25, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[9].AllowTotal);
-            Assert.AreEqual(.29, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[8].Span);
+            Assert.AreEqual(.29, T1.LoadCases[15].DeflectionPPDataBlock.Deflects[8].SpanFeet);
         }
         [Test]
         public void T385Case16DeflectionMPDataTest()
         {
             Assert.AreEqual("TC", T385.LoadCases[16].DeflectionMPDataBlock.Deflects[0].Label);
-            Assert.AreEqual(4.97, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[1].XLocation);
-            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[2].LiveLoadX);
-            Assert.AreEqual(0.02, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[3].LiveLoadY);
+            Assert.AreEqual(4.97, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[1].XLocationFeet);
+            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[2].LiveLoadXInches);
+            Assert.AreEqual(0.02, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[3].LiveLoadYInches);
             Assert.AreEqual(0.05, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[4].Allow);
-            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[5].DeadLoadX);
-            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[4].DeadLoadY);
-            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[3].TotalLoadsX);
-            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[2].TotalLoadsY);
+            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[5].DeadLoadXInches);
+            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[4].DeadLoadYInches);
+            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[3].TotalLoadXInches);
+            Assert.AreEqual(0.00, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[2].TotalLoadYInches);
             Assert.AreEqual(0.63, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[1].AllowTotal);
-            Assert.AreEqual(1.16, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[0].Span);
+            Assert.AreEqual(1.16, T385.LoadCases[16].DeflectionMPDataBlock.Deflects[0].SpanFeet);
         }
         [Test]
         public void T20Case17ForceDataTest()
         {
             Assert.AreEqual(159.78, T20.LoadCases[17].ForceDataBlock.Members[0].NegativeEndAxialNumber);
             Assert.AreEqual(-47.01, T20.LoadCases[17].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(-2.10, T20.LoadCases[17].ForceDataBlock.Members[2].NegativeEndMoment);
+            Assert.AreEqual(-2.10, T20.LoadCases[17].ForceDataBlock.Members[2].NegativeMomentLBS);
             Assert.AreEqual(-19.21, T20.LoadCases[17].ForceDataBlock.Members[3].PositiveEndAxialNumber);
             Assert.AreEqual(-13.16, T20.LoadCases[17].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-60.94, T20.LoadCases[17].ForceDataBlock.Members[5].PositiveEndMoment);
+            Assert.AreEqual(-60.94, T20.LoadCases[17].ForceDataBlock.Members[5].PositiveMomentLBS);
         }
 
         [Test]
         public void T1Case18LoadingDataTest()
         {
             Assert.AreEqual("MWFRS ASCE Parl+-", T1.LoadCases[18].LoadCaseType);
-            Assert.AreEqual(2.00, T1.LoadCases[18].Spacing);
+            Assert.AreEqual(2.00, T1.LoadCases[18].SpacingFeet);
             Assert.AreEqual(1.60, T1.LoadCases[18].DurationFactor);
             Assert.AreEqual(1.60, T1.LoadCases[18].PlateDurationFactor);
             Assert.AreEqual(1, T1.LoadCases[18].NumberOfPlys);
             Assert.AreEqual(false, T1.LoadCases[18].UserModifiedLoads);
             Assert.AreEqual(6, T1.LoadCases[18].KindOfLoadCase);
             Assert.AreEqual(true, T1.LoadCases[18].RepetitiveFactorsUsed);
-            Assert.AreEqual(2.00, T1.LoadCases[18].SoffitDeadLoad);
+            Assert.AreEqual(2.00, T1.LoadCases[18].SoffitDeadLoadPSF);
         }
         [Test]
         public void T385Case19ExtraInfoTest()
@@ -549,11 +549,11 @@ namespace OFParser
             Assert.AreEqual("ASCE 7-10 Wind Type Load Case", T385.LoadCases[19].ExtraInfoBlock.LoadCaseName);
             Assert.AreEqual("B", T385.LoadCases[19].ExtraInfoBlock.ExposureType);
             Assert.AreEqual("Residence", T385.LoadCases[19].ExtraInfoBlock.BuildingClass);
-            Assert.AreEqual(142, T385.LoadCases[19].ExtraInfoBlock.WindSpeed);
+            Assert.AreEqual(142, T385.LoadCases[19].ExtraInfoBlock.WindSpeedMPH);
             Assert.AreEqual("Closed", T385.LoadCases[19].ExtraInfoBlock.BuildingType);
-            Assert.AreEqual(4.2, T385.LoadCases[19].ExtraInfoBlock.DLTop);
-            Assert.AreEqual(1.8, T385.LoadCases[19].ExtraInfoBlock.DLBottom);
-            Assert.AreEqual(32.93, T385.LoadCases[19].ExtraInfoBlock.Height);
+            Assert.AreEqual(4.2, T385.LoadCases[19].ExtraInfoBlock.DLTopPSF);
+            Assert.AreEqual(1.8, T385.LoadCases[19].ExtraInfoBlock.DLBottomPSF);
+            Assert.AreEqual(32.93, T385.LoadCases[19].ExtraInfoBlock.HeightFt);
             Assert.AreEqual(true, T385.LoadCases[19].ExtraInfoBlock.Ceiling);
             Assert.AreEqual(true, T385.LoadCases[19].ExtraInfoBlock.Zone1);
             Assert.AreEqual(false, T385.LoadCases[19].ExtraInfoBlock.Zone2);
@@ -563,12 +563,12 @@ namespace OFParser
         [Test]
         public void T20Case20UniformLoadsTest()
         {
-            Assert.AreEqual(0.77, T20.LoadCases[20].UniformLoadsBlock.Loads[0].StartX);
-            Assert.AreEqual(39.53, T20.LoadCases[20].UniformLoadsBlock.Loads[1].StartY);
-            Assert.AreEqual(10.1, T20.LoadCases[20].UniformLoadsBlock.Loads[2].MagnitudeStart);
-            Assert.AreEqual(0.77, T20.LoadCases[20].UniformLoadsBlock.Loads[3].EndX);
-            Assert.AreEqual(46.52, T20.LoadCases[20].UniformLoadsBlock.Loads[4].EndY);
-            Assert.AreEqual(10.1, T20.LoadCases[20].UniformLoadsBlock.Loads[5].MagnitudeEnd);
+            Assert.AreEqual(0.77, T20.LoadCases[20].UniformLoadsBlock.Loads[0].StartXFeet);
+            Assert.AreEqual(39.53, T20.LoadCases[20].UniformLoadsBlock.Loads[1].StartYFeet);
+            Assert.AreEqual(10.1, T20.LoadCases[20].UniformLoadsBlock.Loads[2].MagnitudeStartPLF);
+            Assert.AreEqual(0.77, T20.LoadCases[20].UniformLoadsBlock.Loads[3].EndXFeet);
+            Assert.AreEqual(46.52, T20.LoadCases[20].UniformLoadsBlock.Loads[4].EndYFeet);
+            Assert.AreEqual(10.1, T20.LoadCases[20].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
             Assert.AreEqual(1.00, T20.LoadCases[20].UniformLoadsBlock.Loads[6].LiveLoad);
         }
         [Test]
@@ -588,8 +588,8 @@ namespace OFParser
             Assert.AreEqual(0, T385.LoadCases[22].CSIDataBlock.Members[0].AX);
             Assert.AreEqual(0.125, T385.LoadCases[22].CSIDataBlock.Members[1].BD);
             Assert.AreEqual(0.166, T385.LoadCases[22].CSIDataBlock.Members[2].Total);
-            Assert.AreEqual(1.7, T385.LoadCases[22].CSIDataBlock.Members[3].LocMax);
-            Assert.AreEqual(7.29, T385.LoadCases[22].CSIDataBlock.Members[4].Len);
+            Assert.AreEqual(1.7, T385.LoadCases[22].CSIDataBlock.Members[3].LocMaxFeet);
+            Assert.AreEqual(7.29, T385.LoadCases[22].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(.731, T385.LoadCases[22].CSIDataBlock.Members[5].Ke);
             Assert.AreEqual(1.1, T385.LoadCases[22].CSIDataBlock.Members[7].RAF);
             Assert.AreEqual(1.15, T385.LoadCases[22].CSIDataBlock.Members[10].RBF);
@@ -606,40 +606,40 @@ namespace OFParser
         public void T1Case24DeflectionPPDataTest()
         {
             Assert.AreEqual("PT", T1.LoadCases[24].DeflectionPPDataBlock.Deflects[0].Label);
-            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[1].XLocation);
-            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[2].LiveLoadX);
-            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[3].LiveLoadY);
+            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[1].XLocationFeet);
+            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[2].LiveLoadXInches);
+            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[3].LiveLoadYInches);
             Assert.AreEqual(.42, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[4].Allow);
-            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[5].DeadLoadX);
-            Assert.AreEqual(0.09, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[6].DeadLoadY);
-            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[7].TotalLoadsX);
-            Assert.AreEqual(0.02, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[8].TotalLoadsY);
+            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[5].DeadLoadXInches);
+            Assert.AreEqual(0.09, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[6].DeadLoadYInches);
+            Assert.AreEqual(0, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[7].TotalLoadXInches);
+            Assert.AreEqual(0.02, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[8].TotalLoadYInches);
             Assert.AreEqual(.25, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[9].AllowTotal);
-            Assert.AreEqual(.29, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[8].Span);
+            Assert.AreEqual(.29, T1.LoadCases[24].DeflectionPPDataBlock.Deflects[8].SpanFeet);
         }
         [Test]
         public void T385Case25ForceDataTest()
         {
             Assert.AreEqual(-27.78, T385.LoadCases[25].ForceDataBlock.Members[0].NegativeEndAxialNumber);
             Assert.AreEqual(-168.14, T385.LoadCases[25].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(54.42, T385.LoadCases[25].ForceDataBlock.Members[2].NegativeEndMoment);
+            Assert.AreEqual(54.42, T385.LoadCases[25].ForceDataBlock.Members[2].NegativeMomentLBS);
             Assert.AreEqual(-34.03, T385.LoadCases[25].ForceDataBlock.Members[3].PositiveEndAxialNumber);
             Assert.AreEqual(0.00, T385.LoadCases[25].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-12.60, T385.LoadCases[25].ForceDataBlock.Members[5].PositiveEndMoment);
+            Assert.AreEqual(-12.60, T385.LoadCases[25].ForceDataBlock.Members[5].PositiveMomentLBS);
         }
 
         [Test]
         public void T20Case27LoadingDataTest()
         {
             Assert.AreEqual("MWFRS ASCE PrpD/L--", T20.LoadCases[27].LoadCaseType);
-            Assert.AreEqual(2.00, T20.LoadCases[27].Spacing);
+            Assert.AreEqual(2.00, T20.LoadCases[27].SpacingFeet);
             Assert.AreEqual(1.60, T20.LoadCases[27].DurationFactor);
             Assert.AreEqual(1.60, T20.LoadCases[27].PlateDurationFactor);
             Assert.AreEqual(1, T20.LoadCases[27].NumberOfPlys);
             Assert.AreEqual(false, T20.LoadCases[27].UserModifiedLoads);
             Assert.AreEqual(6, T20.LoadCases[27].KindOfLoadCase);
             Assert.AreEqual(true, T20.LoadCases[27].RepetitiveFactorsUsed);
-            Assert.AreEqual(2.00, T20.LoadCases[27].SoffitDeadLoad);
+            Assert.AreEqual(2.00, T20.LoadCases[27].SoffitDeadLoadPSF);
         }
         [Test]
         public void T1Case28ExtraInfoTest()
@@ -647,11 +647,11 @@ namespace OFParser
             Assert.AreEqual("ASCE 7-10 Wind Type Load Case", T1.LoadCases[28].ExtraInfoBlock.LoadCaseName);
             Assert.AreEqual("B", T1.LoadCases[28].ExtraInfoBlock.ExposureType);
             Assert.AreEqual("Residence", T1.LoadCases[28].ExtraInfoBlock.BuildingClass);
-            Assert.AreEqual(142, T1.LoadCases[28].ExtraInfoBlock.WindSpeed);
+            Assert.AreEqual(142, T1.LoadCases[28].ExtraInfoBlock.WindSpeedMPH);
             Assert.AreEqual("Closed", T1.LoadCases[28].ExtraInfoBlock.BuildingType);
-            Assert.AreEqual(4.2, T1.LoadCases[28].ExtraInfoBlock.DLTop);
-            Assert.AreEqual(1.8, T1.LoadCases[28].ExtraInfoBlock.DLBottom);
-            Assert.AreEqual(35.55, T1.LoadCases[28].ExtraInfoBlock.Height);
+            Assert.AreEqual(4.2, T1.LoadCases[28].ExtraInfoBlock.DLTopPSF);
+            Assert.AreEqual(1.8, T1.LoadCases[28].ExtraInfoBlock.DLBottomPSF);
+            Assert.AreEqual(35.55, T1.LoadCases[28].ExtraInfoBlock.HeightFt);
             Assert.AreEqual(true, T1.LoadCases[28].ExtraInfoBlock.Ceiling);
             Assert.AreEqual(true, T1.LoadCases[28].ExtraInfoBlock.Zone1);
             Assert.AreEqual(false, T1.LoadCases[28].ExtraInfoBlock.Zone2);
@@ -661,12 +661,12 @@ namespace OFParser
         [Test]
         public void T385Case29UniformLoadsTest()
         {
-            Assert.AreEqual(1.84, T385.LoadCases[29].UniformLoadsBlock.Loads[0].StartX);
-            Assert.AreEqual(32.20, T385.LoadCases[29].UniformLoadsBlock.Loads[1].StartY);
-            Assert.AreEqual(24, T385.LoadCases[29].UniformLoadsBlock.Loads[2].MagnitudeStart);
-            Assert.AreEqual(1.84, T385.LoadCases[29].UniformLoadsBlock.Loads[3].EndX);
-            Assert.AreEqual(36.41, T385.LoadCases[29].UniformLoadsBlock.Loads[4].EndY);
-            Assert.AreEqual(-84.2, T385.LoadCases[29].UniformLoadsBlock.Loads[5].MagnitudeEnd);
+            Assert.AreEqual(1.84, T385.LoadCases[29].UniformLoadsBlock.Loads[0].StartXFeet);
+            Assert.AreEqual(32.20, T385.LoadCases[29].UniformLoadsBlock.Loads[1].StartYFeet);
+            Assert.AreEqual(24, T385.LoadCases[29].UniformLoadsBlock.Loads[2].MagnitudeStartPLF);
+            Assert.AreEqual(1.84, T385.LoadCases[29].UniformLoadsBlock.Loads[3].EndXFeet);
+            Assert.AreEqual(36.41, T385.LoadCases[29].UniformLoadsBlock.Loads[4].EndYFeet);
+            Assert.AreEqual(-84.2, T385.LoadCases[29].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
             Assert.AreEqual(0, T385.LoadCases[29].UniformLoadsBlock.Loads[6].LiveLoad);
         }
         [Test]
@@ -686,8 +686,8 @@ namespace OFParser
             Assert.AreEqual(0, T1.LoadCases[31].CSIDataBlock.Members[0].AX);
             Assert.AreEqual(.207, T1.LoadCases[31].CSIDataBlock.Members[1].BD);
             Assert.AreEqual(.199, T1.LoadCases[31].CSIDataBlock.Members[2].Total);
-            Assert.AreEqual(15.19, T1.LoadCases[31].CSIDataBlock.Members[3].LocMax);
-            Assert.AreEqual(76.88, T1.LoadCases[31].CSIDataBlock.Members[4].Len);
+            Assert.AreEqual(15.19, T1.LoadCases[31].CSIDataBlock.Members[3].LocMaxFeet);
+            Assert.AreEqual(76.88, T1.LoadCases[31].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(.6814, T1.LoadCases[31].CSIDataBlock.Members[5].Ke);
             Assert.AreEqual(1, T1.LoadCases[31].CSIDataBlock.Members[6].RAF);
             Assert.AreEqual(1.15, T1.LoadCases[31].CSIDataBlock.Members[7].RBF);
@@ -705,10 +705,10 @@ namespace OFParser
         {
             Assert.AreEqual(106.16, T20.LoadCases[33].ForceDataBlock.Members[0].NegativeEndAxialNumber);
             Assert.AreEqual(-121.64, T20.LoadCases[33].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(-6.60, T20.LoadCases[33].ForceDataBlock.Members[2].NegativeEndMoment);
+            Assert.AreEqual(-6.60, T20.LoadCases[33].ForceDataBlock.Members[2].NegativeMomentLBS);
             Assert.AreEqual(156.64, T20.LoadCases[33].ForceDataBlock.Members[3].PositiveEndAxialNumber);
             Assert.AreEqual(-15.35, T20.LoadCases[33].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(362.83, T20.LoadCases[33].ForceDataBlock.Members[5].PositiveEndMoment);
+            Assert.AreEqual(362.83, T20.LoadCases[33].ForceDataBlock.Members[5].PositiveMomentLBS);
         }
     }
 }

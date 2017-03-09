@@ -31,6 +31,7 @@ namespace OFParser
         public string Name { get; set; }
         public string Method { get; set; }
         public string Application { get; set; }
+        //what is cq and jsi? can it be geometrized?
         public double Cq { get; set; }
         public double JSI { get; set; }
         public Plate(int Node, int Type, string Name,string Method,string Application,double Cq,double JSI)

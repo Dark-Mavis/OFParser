@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.ForceUnit;
 
 namespace OFParser
 {
@@ -28,18 +29,40 @@ namespace OFParser
     {
         public double NegativeEndAxialNumber { get; set; }
         public double NegativeEndShearNumber { get; set; }
-        public double NegativeEndMoment { get; set; }
+        public double NegativeMomentLBS { get; set; }
         public double PositiveEndAxialNumber { get; set; }
         public double PositiveEndShearNumber { get; set; }
-        public double PositiveEndMoment { get; set; }
+        public double PositiveMomentLBS { get; set; }
         public MemberForce(double NegativeEndAxialNumber,double NegativeEndShearNumber,double NegativeEndMoment,double PositiveEndAxialNumber,double PositiveEndShearNumber,double PositiveEndMoment)
         {
             this.NegativeEndAxialNumber = NegativeEndAxialNumber;
-            this.NegativeEndMoment = NegativeEndMoment;
+            this.NegativeMomentLBS = NegativeEndMoment;
             this.NegativeEndShearNumber = NegativeEndShearNumber;
             this.PositiveEndAxialNumber = PositiveEndAxialNumber;
-            this.PositiveEndMoment = PositiveEndMoment;
+            this.PositiveMomentLBS = PositiveEndMoment;
             this.PositiveEndShearNumber = PositiveEndShearNumber;
+        }
+        public Force NegativeMoment
+        {
+            get
+            {
+                return new Force(new Pound(), this.NegativeMomentLBS);
+            }
+            set
+            {
+                this.NegativeMomentLBS = value.InPounds.Value;
+            }
+        }
+        public Force PositiveMoment
+        {
+            get
+            {
+                return new Force(new Pound(), this.PositiveMomentLBS);
+            }
+            set
+            {
+                this.PositiveMomentLBS = value.InPounds.Value;
+            }
         }
     }
 }

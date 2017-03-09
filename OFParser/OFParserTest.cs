@@ -339,6 +339,20 @@ namespace OFParser
         }
 
         [Test]
+        public void T1DefaultLoadingInfoTest()
+        {
+            Assert.AreEqual("Com-Roof-142Wind", T1.DefaultInfoBlock.Description);
+            Assert.AreEqual(20, T1.DefaultInfoBlock.TCLiveLoadPSF);
+            Assert.AreEqual(10, T1.DefaultInfoBlock.TCDeadLoadPSF);
+            Assert.AreEqual(10, T1.DefaultInfoBlock.BCDeadLoadPSF);
+            Assert.AreEqual(0, T1.DefaultInfoBlock.BCLiveLoadPSF);
+            Assert.AreEqual(1.25, T1.DefaultInfoBlock.DurationFactor);
+            Assert.AreEqual(2, T1.DefaultInfoBlock.SpacingFeet);
+            Assert.AreEqual(1, T1.DefaultInfoBlock.NumberOfPlys);
+            Assert.AreEqual("ASCE 7-10 Wind", T1.DefaultInfoBlock.WindLoading);
+        }
+
+        [Test]
         public void T20Case1LoadingDataTest()
         {
             Assert.AreEqual("STD.AUTO.LOAD", T20.LoadCases[1].LoadCaseType);

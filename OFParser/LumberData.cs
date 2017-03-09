@@ -47,7 +47,7 @@ namespace OFParser
                 pointer--;
             }
             string Description=data.Substring(21, pointer - 21);
-            double E = scientificNumber(data.Substring(40, 9));
+            int E = scientificNumber(data.Substring(40, 9));
             int Fb = Convert.ToInt32(data.Substring(51, 4));
             int Fc = Convert.ToInt32(data.Substring(56, 4));
             int Ft = Convert.ToInt32(data.Substring(61, 4));

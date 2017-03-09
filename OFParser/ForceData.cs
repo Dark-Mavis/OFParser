@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DerivedUnits;
 using UnitClassLibrary.ForceUnit;
 
 namespace OFParser
@@ -42,26 +43,26 @@ namespace OFParser
             this.PositiveMomentLBS = PositiveEndMoment;
             this.PositiveEndShearNumber = PositiveEndShearNumber;
         }
-        public Force NegativeMoment
+        public Moment NegativeMoment
         {
             get
             {
-                return new Force(new Pound(), this.NegativeMomentLBS);
+                return new Moment(this.NegativeMomentLBS, new PoundInch());
             }
             set
             {
-                this.NegativeMomentLBS = value.InPounds.Value;
+                this.NegativeMomentLBS = value.InPoundInches.Value;
             }
         }
-        public Force PositiveMoment
+        public Moment PositiveMoment
         {
             get
             {
-                return new Force(new Pound(), this.PositiveMomentLBS);
+                return new Moment(this.PositiveMomentLBS, new PoundInch());
             }
             set
             {
-                this.PositiveMomentLBS = value.InPounds.Value;
+                this.PositiveMomentLBS = value.InPoundInches.Value;
             }
         }
     }

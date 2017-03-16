@@ -243,7 +243,7 @@ namespace OFParser
             this.Uplifts1 = Uplifts1;
             this.Uplifts2 = Uplifts2;
         }
-       /* public Speed WindSpeed
+        public Speed WindSpeed
         {
             get
             {
@@ -256,7 +256,7 @@ namespace OFParser
             {
                 return new Stress(new PoundPerSquareFoot(), this.DLTopPSF);
             }
-        }*/
+        }
         public Distance Height
         {
             get

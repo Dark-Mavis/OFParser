@@ -1,8 +1,11 @@
-﻿using System;
+﻿using GeometryClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.FootUnit;
 
 namespace OFParser
 {
@@ -48,6 +51,18 @@ namespace OFParser
             this.MomentNumber = MomentNumber;
             this.XLocation = XLocation;
             this.YLocation = YLocation;
+        }
+        public Point Coordinates
+        {
+            get
+            {
+                return new Point(new Distance(new Foot(), XLocation), new Distance(new Foot(), YLocation));
+            }
+            set
+            {
+                this.XLocation = value.X.ValueInFeet;
+                this.YLocation = value.Y.ValueInFeet;
+            }
         }
     }
 }

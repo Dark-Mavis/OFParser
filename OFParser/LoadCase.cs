@@ -48,18 +48,6 @@ namespace OFParser
                 this.SpacingFeet = value.ValueInFeet;
             }
         }
-        /*
-        public Stress SoffitDeadLoad
-        {
-            get
-            {
-                return new Stress(new PoundPerSquareFoot(), this.SoffitDeadLoadPSF);
-            }
-            set
-            {
-                this.SoffitDeadLoadPSF = value.InPSI.Value;
-            }
-        }*/
         public int createData(string[] data)
         {
             LoadCaseType = data[location].Substring(10);
@@ -243,20 +231,6 @@ namespace OFParser
             this.Uplifts1 = Uplifts1;
             this.Uplifts2 = Uplifts2;
         }
-       /* public Speed WindSpeed
-        {
-            get
-            {
-                return new Speed(new MilePerHour(),
-            }
-        }
-        public Stress DLTop
-        {
-            get
-            {
-                return new Stress(new PoundPerSquareFoot(), this.DLTopPSF);
-            }
-        }*/
         public Distance Height
         {
             get

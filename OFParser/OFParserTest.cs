@@ -366,10 +366,10 @@ namespace OFParser
         public void T385Case3ReactionDataTest()
         {
             Assert.AreEqual(0, T385.LoadCases[3].ReactionDataBlock.Bearings[0].BearingNumber);
-            Assert.AreEqual(242.105, T385.LoadCases[3].ReactionDataBlock.Bearings[1].VerticalReactionNumber);
-            Assert.AreEqual(32575.76, T385.LoadCases[3].ReactionDataBlock.Bearings[2].VerticalAllowableNumber);
-            Assert.AreEqual(-0.00, T385.LoadCases[3].ReactionDataBlock.Bearings[1].HorizontalNumber);
-            Assert.AreEqual(0.00, T385.LoadCases[3].ReactionDataBlock.Bearings[0].MomentNumber);
+            Assert.AreEqual(242.105, T385.LoadCases[3].ReactionDataBlock.Bearings[1].VerticalReactionPounds);
+            Assert.AreEqual(32575.76, T385.LoadCases[3].ReactionDataBlock.Bearings[2].VerticalAllowablePounds);
+            Assert.AreEqual(-0.00, T385.LoadCases[3].ReactionDataBlock.Bearings[1].HorizontalPounds);
+            Assert.AreEqual(0.00, T385.LoadCases[3].ReactionDataBlock.Bearings[0].MomentFtPound);
             Assert.AreEqual(1234567890, T385.LoadCases[3].ReactionDataBlock.Bearings[1].XLocation);
             Assert.AreEqual(1234567890, T385.LoadCases[3].ReactionDataBlock.Bearings[2].YLocation);
         }
@@ -426,12 +426,12 @@ namespace OFParser
         [Test]
         public void T1Case8ForceDataTest()
         {
-            Assert.AreEqual(341.97, T1.LoadCases[8].ForceDataBlock.Members[0].NegativeEndAxialNumber);
-            Assert.AreEqual(208.03, T1.LoadCases[8].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(1304.22, T1.LoadCases[8].ForceDataBlock.Members[2].NegativeMomentLBS);
-            Assert.AreEqual(0.00, T1.LoadCases[8].ForceDataBlock.Members[3].PositiveEndAxialNumber);
-            Assert.AreEqual(76.77, T1.LoadCases[8].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-564.56, T1.LoadCases[8].ForceDataBlock.Members[5].PositiveMomentLBS);
+            Assert.AreEqual(341.97, T1.LoadCases[8].ForceDataBlock.Members[0].NegativeEndAxialPounds);
+            Assert.AreEqual(208.03, T1.LoadCases[8].ForceDataBlock.Members[1].NegativeEndShearPounds);
+            Assert.AreEqual(1304.22, T1.LoadCases[8].ForceDataBlock.Members[2].NegativeMomentPounds);
+            Assert.AreEqual(0.00, T1.LoadCases[8].ForceDataBlock.Members[3].PositiveEndAxialPounds);
+            Assert.AreEqual(76.77, T1.LoadCases[8].ForceDataBlock.Members[4].PositiveEndShearPounds);
+            Assert.AreEqual(-564.56, T1.LoadCases[8].ForceDataBlock.Members[5].PositiveMomentPounds);
         }
 
         [Test]
@@ -462,10 +462,10 @@ namespace OFParser
         public void T1Case12ReactionDataTest()
         {
             Assert.AreEqual(1, T1.LoadCases[12].ReactionDataBlock.Bearings[0].BearingNumber);
-            Assert.AreEqual(-245.441, T1.LoadCases[12].ReactionDataBlock.Bearings[1].VerticalReactionNumber);
-            Assert.AreEqual(999999, T1.LoadCases[12].ReactionDataBlock.Bearings[0].VerticalAllowableNumber);
-            Assert.AreEqual(0, T1.LoadCases[12].ReactionDataBlock.Bearings[1].HorizontalNumber);
-            Assert.AreEqual(0, T1.LoadCases[12].ReactionDataBlock.Bearings[0].MomentNumber);
+            Assert.AreEqual(-245.441, T1.LoadCases[12].ReactionDataBlock.Bearings[1].VerticalReactionPounds);
+            Assert.AreEqual(999999, T1.LoadCases[12].ReactionDataBlock.Bearings[0].VerticalAllowablePounds);
+            Assert.AreEqual(0, T1.LoadCases[12].ReactionDataBlock.Bearings[1].HorizontalPounds);
+            Assert.AreEqual(0, T1.LoadCases[12].ReactionDataBlock.Bearings[0].MomentFtPound);
             Assert.AreEqual(12.44, T1.LoadCases[12].ReactionDataBlock.Bearings[1].XLocation);
             Assert.AreEqual(29.79, T1.LoadCases[12].ReactionDataBlock.Bearings[0].YLocation);
         }
@@ -522,12 +522,12 @@ namespace OFParser
         [Test]
         public void T20Case17ForceDataTest()
         {
-            Assert.AreEqual(159.78, T20.LoadCases[17].ForceDataBlock.Members[0].NegativeEndAxialNumber);
-            Assert.AreEqual(-47.01, T20.LoadCases[17].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(-2.10, T20.LoadCases[17].ForceDataBlock.Members[2].NegativeMomentLBS);
-            Assert.AreEqual(-19.21, T20.LoadCases[17].ForceDataBlock.Members[3].PositiveEndAxialNumber);
-            Assert.AreEqual(-13.16, T20.LoadCases[17].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-60.94, T20.LoadCases[17].ForceDataBlock.Members[5].PositiveMomentLBS);
+            Assert.AreEqual(159.78, T20.LoadCases[17].ForceDataBlock.Members[0].NegativeEndAxialPounds);
+            Assert.AreEqual(-47.01, T20.LoadCases[17].ForceDataBlock.Members[1].NegativeEndShearPounds);
+            Assert.AreEqual(-2.10, T20.LoadCases[17].ForceDataBlock.Members[2].NegativeMomentPounds);
+            Assert.AreEqual(-19.21, T20.LoadCases[17].ForceDataBlock.Members[3].PositiveEndAxialPounds);
+            Assert.AreEqual(-13.16, T20.LoadCases[17].ForceDataBlock.Members[4].PositiveEndShearPounds);
+            Assert.AreEqual(-60.94, T20.LoadCases[17].ForceDataBlock.Members[5].PositiveMomentPounds);
         }
 
         [Test]
@@ -575,10 +575,10 @@ namespace OFParser
         public void T1Case21ReactionDataTest()
         {
             Assert.AreEqual(1, T1.LoadCases[21].ReactionDataBlock.Bearings[0].BearingNumber);
-            Assert.AreEqual(368.036, T1.LoadCases[21].ReactionDataBlock.Bearings[1].VerticalReactionNumber);
-            Assert.AreEqual(4661.23, T1.LoadCases[21].ReactionDataBlock.Bearings[0].VerticalAllowableNumber);
-            Assert.AreEqual(0, T1.LoadCases[21].ReactionDataBlock.Bearings[1].HorizontalNumber);
-            Assert.AreEqual(0, T1.LoadCases[21].ReactionDataBlock.Bearings[0].MomentNumber);
+            Assert.AreEqual(368.036, T1.LoadCases[21].ReactionDataBlock.Bearings[1].VerticalReactionPounds);
+            Assert.AreEqual(4661.23, T1.LoadCases[21].ReactionDataBlock.Bearings[0].VerticalAllowablePounds);
+            Assert.AreEqual(0, T1.LoadCases[21].ReactionDataBlock.Bearings[1].HorizontalPounds);
+            Assert.AreEqual(0, T1.LoadCases[21].ReactionDataBlock.Bearings[0].MomentFtPound);
             Assert.AreEqual(12.44, T1.LoadCases[21].ReactionDataBlock.Bearings[1].XLocation);
             Assert.AreEqual(29.79, T1.LoadCases[21].ReactionDataBlock.Bearings[0].YLocation);
         }
@@ -620,12 +620,12 @@ namespace OFParser
         [Test]
         public void T385Case25ForceDataTest()
         {
-            Assert.AreEqual(-27.78, T385.LoadCases[25].ForceDataBlock.Members[0].NegativeEndAxialNumber);
-            Assert.AreEqual(-168.14, T385.LoadCases[25].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(54.42, T385.LoadCases[25].ForceDataBlock.Members[2].NegativeMomentLBS);
-            Assert.AreEqual(-34.03, T385.LoadCases[25].ForceDataBlock.Members[3].PositiveEndAxialNumber);
-            Assert.AreEqual(0.00, T385.LoadCases[25].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(-12.60, T385.LoadCases[25].ForceDataBlock.Members[5].PositiveMomentLBS);
+            Assert.AreEqual(-27.78, T385.LoadCases[25].ForceDataBlock.Members[0].NegativeEndAxialPounds);
+            Assert.AreEqual(-168.14, T385.LoadCases[25].ForceDataBlock.Members[1].NegativeEndShearPounds);
+            Assert.AreEqual(54.42, T385.LoadCases[25].ForceDataBlock.Members[2].NegativeMomentPounds);
+            Assert.AreEqual(-34.03, T385.LoadCases[25].ForceDataBlock.Members[3].PositiveEndAxialPounds);
+            Assert.AreEqual(0.00, T385.LoadCases[25].ForceDataBlock.Members[4].PositiveEndShearPounds);
+            Assert.AreEqual(-12.60, T385.LoadCases[25].ForceDataBlock.Members[5].PositiveMomentPounds);
         }
 
         [Test]
@@ -673,10 +673,10 @@ namespace OFParser
         public void T20Case30ReactionDataTest()
         {
             Assert.AreEqual(0, T20.LoadCases[30].ReactionDataBlock.Bearings[0].BearingNumber);
-            Assert.AreEqual(119.435, T20.LoadCases[30].ReactionDataBlock.Bearings[1].VerticalReactionNumber);
-            Assert.AreEqual(26709.60, T20.LoadCases[30].ReactionDataBlock.Bearings[2].VerticalAllowableNumber);
-            Assert.AreEqual(0, T20.LoadCases[30].ReactionDataBlock.Bearings[3].HorizontalNumber);
-            Assert.AreEqual(0, T20.LoadCases[30].ReactionDataBlock.Bearings[4].MomentNumber);
+            Assert.AreEqual(119.435, T20.LoadCases[30].ReactionDataBlock.Bearings[1].VerticalReactionPounds);
+            Assert.AreEqual(26709.60, T20.LoadCases[30].ReactionDataBlock.Bearings[2].VerticalAllowablePounds);
+            Assert.AreEqual(0, T20.LoadCases[30].ReactionDataBlock.Bearings[3].HorizontalPounds);
+            Assert.AreEqual(0, T20.LoadCases[30].ReactionDataBlock.Bearings[4].MomentFtPound);
             Assert.AreEqual(1234567890, T20.LoadCases[30].ReactionDataBlock.Bearings[3].XLocation);
             Assert.AreEqual(1234567890, T20.LoadCases[30].ReactionDataBlock.Bearings[2].YLocation);
         }
@@ -703,12 +703,12 @@ namespace OFParser
         [Test]
         public void T20Case33ForceDataTest()
         {
-            Assert.AreEqual(106.16, T20.LoadCases[33].ForceDataBlock.Members[0].NegativeEndAxialNumber);
-            Assert.AreEqual(-121.64, T20.LoadCases[33].ForceDataBlock.Members[1].NegativeEndShearNumber);
-            Assert.AreEqual(-6.60, T20.LoadCases[33].ForceDataBlock.Members[2].NegativeMomentLBS);
-            Assert.AreEqual(156.64, T20.LoadCases[33].ForceDataBlock.Members[3].PositiveEndAxialNumber);
-            Assert.AreEqual(-15.35, T20.LoadCases[33].ForceDataBlock.Members[4].PositiveEndShearNumber);
-            Assert.AreEqual(362.83, T20.LoadCases[33].ForceDataBlock.Members[5].PositiveMomentLBS);
+            Assert.AreEqual(106.16, T20.LoadCases[33].ForceDataBlock.Members[0].NegativeEndAxialPounds);
+            Assert.AreEqual(-121.64, T20.LoadCases[33].ForceDataBlock.Members[1].NegativeEndShearPounds);
+            Assert.AreEqual(-6.60, T20.LoadCases[33].ForceDataBlock.Members[2].NegativeMomentPounds);
+            Assert.AreEqual(156.64, T20.LoadCases[33].ForceDataBlock.Members[3].PositiveEndAxialPounds);
+            Assert.AreEqual(-15.35, T20.LoadCases[33].ForceDataBlock.Members[4].PositiveEndShearPounds);
+            Assert.AreEqual(362.83, T20.LoadCases[33].ForceDataBlock.Members[5].PositiveMomentPounds);
         }
     }
 }

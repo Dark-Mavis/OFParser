@@ -1,8 +1,13 @@
-﻿using System;
+﻿using GeometryClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DerivedUnits;
+using UnitClassLibrary.DistanceUnit;
+using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
+using UnitClassLibrary.ForceUnit;
 
 namespace OFParser
 {
@@ -33,21 +38,77 @@ namespace OFParser
     class BearingCase
     {
         public int BearingNumber { get; set; }
-        public double VerticalReactionNumber { get; set; }
-        public double VerticalAllowableNumber { get; set; }
-        public double HorizontalNumber { get; set; }
-        public double MomentNumber { get; set; }
+        public double VerticalReactionPounds { get; set; }
+        public double VerticalAllowablePounds { get; set; }
+        public double HorizontalPounds { get; set; }
+        public double MomentFtPound { get; set; }
         public double XLocation { get; set; }
         public double YLocation { get; set; }
         public BearingCase(int BearingNumber,double VerticalReactionNumber,double VerticalAllowableNumber,double HorizontalNumber,double MomentNumber,double XLocation,double YLocation)
         {
             this.BearingNumber = BearingNumber;
-            this.VerticalReactionNumber = VerticalReactionNumber;
-            this.VerticalAllowableNumber = VerticalAllowableNumber;
-            this.HorizontalNumber = HorizontalNumber;
-            this.MomentNumber = MomentNumber;
+            this.VerticalReactionPounds = VerticalReactionNumber;
+            this.VerticalAllowablePounds = VerticalAllowableNumber;
+            this.HorizontalPounds = HorizontalNumber;
+            this.MomentFtPound = MomentNumber;
             this.XLocation = XLocation;
             this.YLocation = YLocation;
+        }
+        public Point Coordinates
+        {
+            get
+            {
+                return new Point(new Distance(new Inch(), XLocation), new Distance(new Inch(), YLocation));
+            }
+            set
+            {
+                this.XLocation = value.X.ValueInFeet;
+                this.YLocation = value.Y.ValueInFeet;
+            }
+        }
+        public Force VerticalReaction
+        {
+            get
+            {
+                return new Force(new Pound(), this.VerticalReactionPounds);
+            }
+            set
+            {
+                this.VerticalReactionPounds = value.InPounds.Value;
+            }
+        }
+        public Force VerticalAllowable
+        {
+            get
+            {
+                return new Force(new Pound(), this.VerticalAllowablePounds);
+            }
+            set
+            {
+                this.VerticalAllowablePounds = value.InPounds.Value;
+            }
+        }
+        public Force Horizontal
+        {
+            get
+            {
+                return new Force(new Pound(), this.HorizontalPounds);
+            }
+            set
+            {
+                this.HorizontalPounds = value.InPounds.Value;
+            }
+        }
+        public Moment Moment
+        {
+            get
+            {
+                return new Moment(new FootPound(), MomentFtPound);
+            }
+            set
+            {
+                this.MomentFtPound = value.InFootPounds.Value;
+            }
         }
     }
 }

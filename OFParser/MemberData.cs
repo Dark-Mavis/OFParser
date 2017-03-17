@@ -52,7 +52,6 @@ namespace OFParser
         public Type Type { get; set; }
         public int AssociatedPieceNumber { get; set; }
         public int LumberNumber { get; set; }
-        //what is purlin spacing?
         public double PurlinSpacingInches { get; set; }
         public Member(int NegativeJoint,int NegEndFix,int PositiveJoint,int PosEndFix, Type Type,int AssociatedPieceNumber,int LumberNumber,double PurlinSpacing)
         {

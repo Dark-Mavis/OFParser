@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitClassLibrary.DerivedUnits;
 using UnitClassLibrary.ForceUnit;
 
 namespace OFParser
@@ -27,41 +28,85 @@ namespace OFParser
     }
     class MemberForce
     {
-        public double NegativeEndAxialNumber { get; set; }
-        public double NegativeEndShearNumber { get; set; }
-        public double NegativeMomentLBS { get; set; }
-        public double PositiveEndAxialNumber { get; set; }
-        public double PositiveEndShearNumber { get; set; }
-        public double PositiveMomentLBS { get; set; }
+        public double NegativeEndAxialPounds { get; set; }
+        public double NegativeEndShearPounds { get; set; }
+        public double NegativeMomentPounds { get; set; }
+        public double PositiveEndAxialPounds { get; set; }
+        public double PositiveEndShearPounds { get; set; }
+        public double PositiveMomentPounds { get; set; }
         public MemberForce(double NegativeEndAxialNumber,double NegativeEndShearNumber,double NegativeEndMoment,double PositiveEndAxialNumber,double PositiveEndShearNumber,double PositiveEndMoment)
         {
-            this.NegativeEndAxialNumber = NegativeEndAxialNumber;
-            this.NegativeMomentLBS = NegativeEndMoment;
-            this.NegativeEndShearNumber = NegativeEndShearNumber;
-            this.PositiveEndAxialNumber = PositiveEndAxialNumber;
-            this.PositiveMomentLBS = PositiveEndMoment;
-            this.PositiveEndShearNumber = PositiveEndShearNumber;
+            this.NegativeEndAxialPounds = NegativeEndAxialNumber;
+            this.NegativeMomentPounds = NegativeEndMoment;
+            this.NegativeEndShearPounds = NegativeEndShearNumber;
+            this.PositiveEndAxialPounds = PositiveEndAxialNumber;
+            this.PositiveMomentPounds = PositiveEndMoment;
+            this.PositiveEndShearPounds = PositiveEndShearNumber;
         }
-        public Force NegativeMoment
+        public Moment NegativeMoment
         {
             get
             {
-                return new Force(new Pound(), this.NegativeMomentLBS);
+                return new Moment(this.NegativeMomentPounds, new PoundInch());
             }
             set
             {
-                this.NegativeMomentLBS = value.InPounds.Value;
+                this.NegativeMomentPounds = value.InPoundInches.Value;
             }
         }
-        public Force PositiveMoment
+        public Moment PositiveMoment
         {
             get
             {
-                return new Force(new Pound(), this.PositiveMomentLBS);
+                return new Moment(this.PositiveMomentPounds, new PoundInch());
             }
             set
             {
-                this.PositiveMomentLBS = value.InPounds.Value;
+                this.PositiveMomentPounds = value.InPoundInches.Value;
+            }
+        }
+        public Force NegativeEndAxial
+        {
+            get
+            {
+                return new Force(new Pound(), NegativeEndAxialPounds);
+            }
+            set
+            {
+                this.NegativeEndAxialPounds = value.InPounds.Value;
+            }
+        }
+        public Force NegativeEndShear
+        {
+            get
+            {
+                return new Force(new Pound(), NegativeEndShearPounds);
+            }
+            set
+            {
+                this.NegativeEndShearPounds = value.InPounds.Value;
+            }
+        }
+        public Force PositiveEndAxial
+        {
+            get
+            {
+                return new Force(new Pound(), PositiveEndAxialPounds);
+            }
+            set
+            {
+                this.PositiveEndAxialPounds = value.InPounds.Value;
+            }
+        }
+        public Force PositiveEndShear
+        {
+            get
+            {
+                return new Force(new Pound(), PositiveEndShearPounds);
+            }
+            set
+            {
+                this.PositiveEndShearPounds = value.InPounds.Value;
             }
         }
     }

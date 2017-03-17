@@ -247,7 +247,11 @@ namespace OFParser
         {
             get
             {
-                return new Speed(new MilePerHour(),
+                return new Speed(new MilePerHour(), WindSpeedMPH);
+            }
+            set
+            {
+                this.WindSpeedMPH = value.ValueIn(new MilePerHour());
             }
         }
         public Stress DLTop
@@ -255,6 +259,21 @@ namespace OFParser
             get
             {
                 return new Stress(new PoundPerSquareFoot(), this.DLTopPSF);
+            }
+            set
+            {
+                this.DLTopPSF = value.MeasurementIn(new PoundPerSquareFoot()).Value;
+            }
+        }
+        public Stress DLBottom
+        {
+            get
+            {
+                return new Stress(new PoundPerSquareFoot(), this.DLBottomPSF);
+            }
+            set
+            {
+                this.DLBottomPSF = value.MeasurementIn(new PoundPerSquareFoot()).Value;
             }
         }
         public Distance Height

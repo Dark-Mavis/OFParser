@@ -9,6 +9,7 @@ using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
+    //these enums have all the types I saw, there are probably more
     public enum MSR
     {
         F
@@ -26,17 +27,14 @@ namespace OFParser
         {
             Lumbers = new List<Lumber>();
         }
-        public void AddNullLumber()
-        {
-            Lumber cur = null;
-            Lumbers.Add(cur);
-        }
         public bool AddLumber(string data)
         {
+            //this if is to check that E is starting when it's supposed to
             if(data[40]!='1' &&data[40]!='2' && data[40] != '3' && data[40] != '4' && data[40] != '5' && data[40] != '6' && data[40] != '7' && data[40] != '8' && data[40] != '9' && data[40] != '0')
             {
                 return false;
             }
+            int LumberNumber = Convert.ToInt32(data.Substring(3, 2));
             int Grade = Convert.ToInt32(data.Substring(7, 2));
             double Depth = Convert.ToDouble(data.Substring(11,4));
             double Thick = Convert.ToDouble(data.Substring(16, 4));
@@ -47,7 +45,7 @@ namespace OFParser
                 pointer--;
             }
             string Description=data.Substring(21, pointer - 21);
-            double E = scientificNumber(data.Substring(40, 9));
+            int E = scientificNumber(data.Substring(40, 9));
             int Fb = Convert.ToInt32(data.Substring(51, 4));
             int Fc = Convert.ToInt32(data.Substring(56, 4));
             int Ft = Convert.ToInt32(data.Substring(61, 4));
@@ -61,11 +59,13 @@ namespace OFParser
                 pointer++;
             }
             string SizeName = data.Substring(81,pointer-81);
-            Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
+            Lumbers.Add(new Lumber(LumberNumber,Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
             return true;
         }
         public void AddLumberDoubleRow(string data1,string data2)
         {
+            //data1 is the first line, data2 is the second
+            int LumberNumber = Convert.ToInt32(data1.Substring(3, 2));
             int Grade = Convert.ToInt32(data1.Substring(7, 2));
             double Depth = Convert.ToDouble(data1.Substring(11, 4));
             double Thick = Convert.ToDouble(data1.Substring(16, 4));
@@ -84,7 +84,7 @@ namespace OFParser
                 pointer++;
             }
             string SizeName = data2.Substring(81, pointer - 83);
-            Lumbers.Add(new Lumber(Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
+            Lumbers.Add(new Lumber(LumberNumber,Grade, Depth, Thick, Description, E, Fb, Fc, Ft, Fcp, Fb, MSR, CW, SizeName));
         }
         private MSR enumMSRCheck(char check)
         {
@@ -140,6 +140,7 @@ namespace OFParser
     }
     class Lumber
     {
+        public int LumberNumber { get; set; }
         public int Grade { get; set; }
         public double DepthInches { get; set; }
         public double ThickInches { get; set; }
@@ -153,8 +154,9 @@ namespace OFParser
         public MSR MSR { get; set; }
         public CW CW { get; set; }
         public string SizeName { get; set; }
-        public Lumber(int Grade,double Depth,double Thick,string Description,int E,int Fb,int Fc,int Ft,int Fcp,int Fv,MSR MSR,CW CW,string SizeName)
+        public Lumber(int LumberNumber,int Grade,double Depth,double Thick,string Description,int E,int Fb,int Fc,int Ft,int Fcp,int Fv,MSR MSR,CW CW,string SizeName)
         {
+            this.LumberNumber = LumberNumber;
             this.Grade = Grade;
             this.DepthInches = Depth;
             this.ThickInches = Thick;

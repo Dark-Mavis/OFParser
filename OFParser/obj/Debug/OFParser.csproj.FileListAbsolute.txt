@@ -1,8 +1,4 @@
-C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.exe.config
-C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.exe
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.pdb
-C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.csprojResolveAssemblyReference.cache
-C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.exe
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.pdb
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\clipper_library.dll
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\GeometryClassLibrary.dll
@@ -13,3 +9,9 @@ C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\UnitClassLibrary.dl
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\MathNet.Numerics.xml
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\MoreLinq.Portable.xml
 C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\nunit.framework.xml
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.Properties.Resources.resources
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.csproj.GenerateResource.Cache
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.dll.config
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\bin\Debug\OFParser.dll
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.dll
+C:\Users\Cerullium\OneDrive\Work\OFParser\OFParser\obj\Debug\OFParser.csprojResolveAssemblyReference.cache

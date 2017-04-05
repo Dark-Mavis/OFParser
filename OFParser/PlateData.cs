@@ -15,13 +15,22 @@ namespace OFParser
         }
         public void AddPlate(string data)
         {
+            //Plate # is in the data, but like Joint Data the reference number in Plates(the list) is the same
             int pointer = 21;
             while(data[pointer]!=' ')
             {
                 pointer++;
             }
-            //ask matt about method
-            Plates.Add(new Plate(Convert.ToInt32(data.Substring(10, 2)), Convert.ToInt32(data.Substring(16, 2)), data.Substring(21, pointer - 21), data.Substring(43, 1), data.Substring(47, 7), Convert.ToDouble(data.Substring(58, 4)),Convert.ToDouble(data.Substring(64))));
+            int nodeNumber = Convert.ToInt32(data.Substring(10, 2));
+            int type = Convert.ToInt32(data.Substring(16, 2));
+            string name = data.Substring(21, pointer - 21);
+            //method in all examples has either an N or nothing
+            string method = data.Substring(43, 1);
+            //application in all my examples says "On Face"
+            string application = data.Substring(47, 7);
+            double cq = Convert.ToDouble(data.Substring(58, 4));
+            double jsi = Convert.ToDouble(data.Substring(64));
+            Plates.Add(new Plate(nodeNumber,type,name,method,application,cq,jsi));
         }
     }
     class Plate

@@ -15,26 +15,26 @@ namespace OFParser
         }
         public void AddJoint(string data)
         {
+            int jointNumber = Convert.ToInt32(data.Substring(5, 2));
             int pointer = 11;
             while (data[pointer]!=' ')
             {
                 pointer++;
             }
-
-            Joint cur=new Joint(Convert.ToInt32(data.Substring(5, 2)), data.Substring(11, pointer - 11));
+            //plateType always appears as WAVE in my examples, however there is a bunch of space 
+            //after that before the next data, so I used this pointer method to be safe
+            string plateType = data.Substring(11, pointer - 11);
+            //current is just the moniker used for the Joint that will be stored
+            Joint current=new Joint(jointNumber,plateType);
             data = data.Substring(22);
+            //this next line helps determine how many sets of information are on this joint
             int times = data.Count() / 15;
             for(int i = 0; i < times; i++)
             {
-                cur.AddTeeth(data.Substring(0, 15));
+                current.AddTeeth(data.Substring(0, 15));
                 data = data.Substring(15);
             }
-            Joint temp = null;
-            while (cur.JointNumber > Joints.Count())
-            {
-                Joints.Add(temp);
-            }
-            Joints.Add(cur);
+            Joints.Add(current);
         }
     }
     class Joint
@@ -50,8 +50,10 @@ namespace OFParser
         }
         public void AddTeeth(string data)
         {
-            int mem = Convert.ToInt32(data.Substring(3, 2));
-            Teeths.Add(new Teeth(Convert.ToInt32(data.Substring(3, 2)), Convert.ToInt32(data.Substring(8, 2)), Convert.ToInt32(data.Substring(13, 2))));
+            int memberNumber = Convert.ToInt32(data.Substring(3, 2));
+            int requiredTeeth = Convert.ToInt32(data.Substring(8, 2));
+            int availableTeeth = Convert.ToInt32(data.Substring(13, 2));
+            Teeths.Add(new Teeth(memberNumber,requiredTeeth,availableTeeth));
         }
     }
     class Teeth

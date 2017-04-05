@@ -19,8 +19,6 @@ namespace OFParser
         public BearingData(double MaxProtrusion,bool OnlyFast,int jointCount)
         {
             Bearings = new List<Bearing>();
-            //ask Nathan about this
-            Bearings.Add(null);
             this.jointCount = jointCount;
             this.MaxProtrusionOfSupportingFastener = MaxProtrusion;
             this.OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember = OnlyFast;
@@ -34,13 +32,20 @@ namespace OFParser
             int BearingType = Convert.ToInt32(data.Substring(64, 2));
             string WallSpecies = data.Substring(73);
             Bearings.Add(new Bearing(jointCount, Width, XCoord, YCoord, BearingType, WallSpecies));
-            Bearings[Bearings.Count() - 1].Joints[Convert.ToInt32(data.Substring(10, 2))] = Type;
+            AddJointToBearing(data);
         }
         public void AddJointToBearing(string data)
         {
-            int bearing = Convert.ToInt32(data.Substring(4, 2));
-            Type Type = enumChecker(data.Substring(18, 4));
-            Bearings[bearing].Joints[Convert.ToInt32(data.Substring(10, 2))] = Type;
+            data = data.TrimStart();
+            int bearing = Convert.ToInt32(data.Substring(0, 2));
+            data = data.Substring(2);
+            data = data.TrimStart();
+            int jointNumber = Convert.ToInt32(data.Substring(0, 2));
+            data = data.Substring(2);
+            data = data.TrimStart();
+            Type Type = enumChecker(data.Substring(0, 4));
+            JointType current = new JointType(jointNumber, Type);
+            Bearings[bearing-1].Joints.Add(current);
         }
         private Type enumChecker(string check)
         {
@@ -60,7 +65,7 @@ namespace OFParser
     }
     class Bearing
     {
-        public List<Type> Joints { get; set; }
+        public List<JointType> Joints { get; set; }
         public double WidthInches { get; set; }
         public double XCoord { get; set; }
         public double YCoord { get; set; }
@@ -68,20 +73,12 @@ namespace OFParser
         public string WallSpecies { get; set; }
         public Bearing(int jointCount,double Width,double XCoord,double YCoord,int BearingType,string WallSpecies)
         {
-            Joints = new List<Type>();
-            for(int i = 0; i < jointCount; i++)
-            {
-                Joints.Add(Type.empty);
-            }
+            Joints = new List<JointType>();
             this.WidthInches = Width;
             this.XCoord = XCoord;
             this.YCoord = YCoord;
             this.BearingType = BearingType;
             this.WallSpecies = WallSpecies;
-        }
-        public void AddJoint(Type Type,int location)
-        {
-            Joints[location] = Type;
         }
         public Point Coordinates
         {
@@ -105,6 +102,16 @@ namespace OFParser
             {
                 this.WidthInches = value.ValueInInches;
             }
+        }
+    }
+    class JointType
+    {
+        public int JointNumber { get; set; }
+        public Type Type { get; set; }
+        public JointType(int JointNumber,Type Type)
+        {
+            this.JointNumber = JointNumber;
+            this.Type = Type;
         }
     }
 }

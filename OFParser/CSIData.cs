@@ -9,7 +9,7 @@ using UnitClassLibrary.DistanceUnit.DistanceTypes.Imperial.InchUnit;
 
 namespace OFParser
 {
-    class CSIData
+    class CSIData//per ply
     {
         public List<MemberCase> Members { get; set; }
         public CSIData()
@@ -18,24 +18,22 @@ namespace OFParser
         }
         public void AddMember(string data)
         {
-            while (Convert.ToInt32(data.Substring(6,2))>Members.Count())
-            {
-                MemberCase cur = null;
-                Members.Add(cur);
-            }
-            double AX = Convert.ToDouble(data.Substring(12, 5));
-            double BD = Convert.ToDouble(data.Substring(19, 5));
-            double Total = Convert.ToDouble(data.Substring(29, 5));
-            double LocMax = Convert.ToDouble(data.Substring(40, 5));
-            double Len = Convert.ToDouble(data.Substring(53, 5));
-            double Ke = Convert.ToDouble(data.Substring(63, 6));
-            double RAF = Convert.ToDouble(data.Substring(70, 4));
-            double RBF = Convert.ToDouble(data.Substring(75));
-            Members.Add(new MemberCase(AX, BD, Total, LocMax, Len, Ke, RAF, RBF));
+            //not sure what some of these abbreviations mean
+            int memberNumber = Convert.ToInt32(data.Substring(6, 2));
+            double ax = Convert.ToDouble(data.Substring(12, 5));
+            double bd = Convert.ToDouble(data.Substring(19, 5));
+            double total = Convert.ToDouble(data.Substring(29, 5));
+            double locMax = Convert.ToDouble(data.Substring(40, 5));
+            double length = Convert.ToDouble(data.Substring(53, 5));
+            double ke = Convert.ToDouble(data.Substring(63, 6));
+            double raf = Convert.ToDouble(data.Substring(70, 4));
+            double rbf = Convert.ToDouble(data.Substring(75));
+            Members.Add(new MemberCase(memberNumber, ax, bd, total, locMax, length, ke, raf, rbf));
         }
     }
     class MemberCase
     {
+        public int MemberNumber { get; set; }
         public double AX { get; set; }
         public double BD { get; set; }
         public double Total { get; set; }
@@ -44,8 +42,9 @@ namespace OFParser
         public double Ke { get; set; }
         public double RAF { get; set; }
         public double RBF { get; set; }
-        public MemberCase(double AX,double BD,double Total,double LocMax,double Len,double Ke,double RAF,double RBF)
+        public MemberCase(int MemberNumber, double AX,double BD,double Total,double LocMax,double Len,double Ke,double RAF,double RBF)
         {
+            this.MemberNumber = MemberNumber;
             this.AX = AX;
             this.BD = BD;
             this.Total = Total;

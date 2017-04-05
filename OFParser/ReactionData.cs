@@ -14,8 +14,13 @@ namespace OFParser
     class ReactionData
     {
         public List<BearingCase> Bearings { get; set; }
-        public ReactionData()
-        { 
+        //sometimes the ReactionData ends with a line reading as follows:
+        //***** NOTE: BEARING REACTION EXCEEDS ALLOWABLE *****
+        //boolean is true if this line appears
+        public bool BearingReactionExceedsAllowable { get; set; }
+        public ReactionData(bool bearingReactionExceedsAllowable)
+        {
+            this.BearingReactionExceedsAllowable = bearingReactionExceedsAllowable;
             Bearings = new List<BearingCase>();
         }
         public void AddBearing(string data)
@@ -27,6 +32,8 @@ namespace OFParser
             double MomentNumber = Convert.ToDouble(data.Substring(52, 5));
             double XLocation = 1234567890;
             double YLocation = 1234567890;
+            //this conditional is because in some cases, X and Y Location don't appear
+            //should ask Nathan about this
             if (data.Count()>58)
             { 
                 XLocation = Convert.ToDouble(data.Substring(65, 9));

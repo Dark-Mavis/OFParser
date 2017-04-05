@@ -17,7 +17,9 @@ namespace OFParser
     }
     class OFParser
     {
-        private ArrayList file = new ArrayList();
+        //there are a lot of boolean variables stored that seemed very much like booleans, but I could be wrong
+        //I only applied boolean to variables that said false, true, yes, and no as their values in the OF files
+        private List<string> file = new List<string>();
         public string Version { get; set; }
         public DateTime DateAndTime { get; set; }
         public string JobKey { get; set; }
@@ -42,15 +44,16 @@ namespace OFParser
         {
             createData(location);
         }
-        private void readInFile(string location)
+        //takes in file reference and stores each line as a string into file
+        private void readInFile(string data)
         {
-            using (StreamReader sr = File.OpenText(location))
+            string[] lines = data.Split('\n');
+            //it's lines.count-1 because the data split always adds a final line with nothing in it
+            for (int i = 0; i < lines.Count() - 1; i++)
             {
-                string s = String.Empty;
-                while ((s = sr.ReadLine()) != null)
-                {
-                    file.Add(s);
-                }
+                //getting rid of \r at the end of each string
+                lines[i] = lines[i].Substring(0, (lines[i].Count() - 1));
+                file.Add(lines[i]);
             }
         }
         private void createData(string location)
@@ -62,40 +65,65 @@ namespace OFParser
                 data[i] = (string)file[i];
             }
             Version = data[3].Substring(38, 16);
+            int year = Convert.ToInt32(data[6].Substring(33, 4));
             int month = monthCapture(data[6].Substring(17, 3));
-            DateAndTime = new DateTime(Convert.ToInt32(data[6].Substring(33,4)),month, Convert.ToInt32(data[6].Substring(21, 2)), Convert.ToInt32(data[6].Substring(24, 2)), Convert.ToInt32(data[6].Substring(27, 2)), Convert.ToInt32(data[6].Substring(30, 2)));
+            int day = Convert.ToInt32(data[6].Substring(21, 2));
+            int hour = Convert.ToInt32(data[6].Substring(24, 2));
+            int minute = Convert.ToInt32(data[6].Substring(27, 2));
+            int second = Convert.ToInt32(data[6].Substring(30, 2));
+            DateAndTime = new DateTime(year,month,day, hour, minute, second);
+            //JobKey and JobDescription are found on the same line with a / separating them
             JobKey = data[8].Substring(27, 11);
             JobDescription = data[8].Substring(41);
             TrussDescription = data[9].Substring(19);
+            //stores data under "Miscellaneous Data Block"
             miscDataStore(data);
+            //stores data under "Joint Data"
             jointDataStore(data);
+            //stores data under "Plate Information"
             plateInfoStore(data);
+            //stores data under "Plate Data"
             plateDataStore(data);
+            //stores data under "Quality Control ToothCounts"
             qualityControlStore(data);
+            //stores data under "Member Data"
             memberDataStore(data);
+            //stores data under "Lumber Data"
             lumberDataStore(data);
+            //stores data under "Bearing Data"
             bearingDataStore(data);
-
+            //stores data under "Default Loading Information"
             defaultLoadingInfoStore(data);
+
+            //each OF file has only one section for each of the previous sections, 
+            //but after these there are a variable number of Load Cases
             loadCases(data);
         }
         private void miscDataStore(string[] data)
         {
-            bool fire = booleanMaker(data[16].Substring(28));
-            bool tc = booleanMaker(data[18].Substring(28));
-            bool load = booleanMaker(data[22].Substring(28));
-            bool plaster = booleanMaker(data[23].Substring(28));
-            bool bolts = booleanMaker(data[25].Substring(28));
-            bool screws = booleanMaker(data[26].Substring(28));
-            bool emp = booleanMaker(data[28].Substring(28));
-            bool floor = booleanMaker(data[29].Substring(28));
-            bool km = booleanMaker(data[30].Substring(28));
-            bool rigid = booleanMaker(data[31].Substring(28));
-            bool plate = booleanMaker(data[32].Substring(28));
-            MiscDataBlock = new MiscData(data[15].Substring(28), fire, data[17].Substring(28), tc, Convert.ToDouble(data[19].Substring(28)), Convert.ToDouble(data[20].Substring(28)), data[21].Substring(28), load, plaster, data[24].Substring(28), bolts, screws, data[27].Substring(28), emp, floor, km, rigid, plate);
+            string designCode = data[15].Substring(28);
+            bool fireRetardantTreated = booleanMaker(data[16].Substring(28));
+            string mkaPriority = data[17].Substring(28);
+            bool tcSheathingStatus = booleanMaker(data[18].Substring(28));
+            //please note, the following two names are the name found in the file plus "Inches" since that is the assumed unit
+            double tcPurlinSpacingInches = Convert.ToDouble(data[19].Substring(28));
+            double bcPurlinSpacingInches = Convert.ToDouble(data[20].Substring(28));
+            string requestedBraceType = data[21].Substring(28);
+            bool loadSharing = booleanMaker(data[22].Substring(28));
+            bool plasterCeiling = booleanMaker(data[23].Substring(28));
+            string sy42SquareCutWebCalcs = data[24].Substring(28);
+            bool allowBoltsOnGirders = booleanMaker(data[25].Substring(28));
+            bool sdsScrewsOnGirders = booleanMaker(data[26].Substring(28));
+            bool empiricalAnalysis = booleanMaker(data[28].Substring(28));
+            bool compositeFloor = booleanMaker(data[29].Substring(28));
+            bool kmFactor = booleanMaker(data[30].Substring(28));
+            bool rigidInsertsAllowedForFullFc = booleanMaker(data[31].Substring(28));
+            bool plateIncreaseFactorForOverstressedBrg = booleanMaker(data[32].Substring(28));
+            MiscDataBlock = new MiscData(designCode, fireRetardantTreated, mkaPriority, tcSheathingStatus, tcPurlinSpacingInches, bcPurlinSpacingInches, requestedBraceType, loadSharing, plasterCeiling,sy42SquareCutWebCalcs , allowBoltsOnGirders, sdsScrewsOnGirders, data[27].Substring(28), empiricalAnalysis, compositeFloor, kmFactor, rigidInsertsAllowedForFullFc, plateIncreaseFactorForOverstressedBrg);
         }
         private void jointDataStore(string[] data)
         {
+            //this hard jump could be dangerous
             location = 35;
             while (data[location] != "")
             {
@@ -110,20 +138,22 @@ namespace OFParser
         private void plateInfoStore(string[] data)
         {
             location = location + 3;
-            string ToothHoldingDescription = data[location].Substring(30);
-            int ToothHoldingName = Convert.ToInt32(data[location + 1].Substring(30));
-            int NumberOfUnplatedJoints = Convert.ToInt32(data[location + 2].Substring(30));
-            int NumberOfTypes = Convert.ToInt32(data[location + 3].Substring(30));
-            int MostCommonPlateType = Convert.ToInt32(data[location + 4].Substring(30));
-            string PlateHandling = data[location + 5].Substring(30);
+            string toothHoldingDescription = data[location].Substring(30);
+            int toothHoldingName = Convert.ToInt32(data[location + 1].Substring(30));
+            int numberOfUnplatedJoints = Convert.ToInt32(data[location + 2].Substring(30));
+            int numberOfTypes = Convert.ToInt32(data[location + 3].Substring(30));
+            int mostCommonPlateType = Convert.ToInt32(data[location + 4].Substring(30));
+            //only answer seen for plateHandling is "Checked" so... possibly a boolean. Left as string to be safe
+            string plateHandling = data[location + 5].Substring(30);
 
-            string PlateTypeName = data[location + 8].Substring(24);
-            int PlateType = Convert.ToInt32(data[location + 9].Substring(24));
-            double ZeroTension = Convert.ToDouble(data[location + 10].Substring(24, 7));
-            double NinetyTension = Convert.ToDouble(data[location + 11].Substring(24, 7));
-            double ZeroShear = Convert.ToDouble(data[location + 12].Substring(24, 7));
-            double NinetyShear = Convert.ToDouble(data[location + 13].Substring(24, 7));
-            PlateInfoBlock = new PlateInfo(ToothHoldingDescription,ToothHoldingName,NumberOfUnplatedJoints,NumberOfTypes,MostCommonPlateType,PlateHandling,PlateTypeName,PlateType,ZeroTension,NinetyTension,ZeroShear,NinetyShear);
+            string plateTypeName = data[location + 8].Substring(24);
+            int plateType = Convert.ToInt32(data[location + 9].Substring(24));
+            //the following four variables all had a symbol of some sort between 0 or 90 and Tension or Shear. Not sure what it was. Greek?
+            double zeroTension = Convert.ToDouble(data[location + 10].Substring(24, 7));
+            double ninetyTension = Convert.ToDouble(data[location + 11].Substring(24, 7));
+            double zeroShear = Convert.ToDouble(data[location + 12].Substring(24, 7));
+            double ninetyShear = Convert.ToDouble(data[location + 13].Substring(24, 7));
+            PlateInfoBlock = new PlateInfo(toothHoldingDescription,toothHoldingName,numberOfUnplatedJoints,numberOfTypes,mostCommonPlateType,plateHandling,plateTypeName,plateType,zeroTension,ninetyTension,zeroShear,ninetyShear);
         }
         private void plateDataStore(string[] data)
         {
@@ -168,11 +198,9 @@ namespace OFParser
             while (data[location] != "")
             {
                 int check = Convert.ToInt32(data[location].Substring(3, 2));
-                while (LumberDataBlock.Lumbers.Count() < check)
-                {
-                    LumberDataBlock.AddNullLumber();
-                }
                 doubleRow=LumberDataBlock.AddLumber(data[location]);
+                //this if/else thing is because the last row when printed puts the data for
+                //the last one on two rows because the Description Species name goes too far
                 if (doubleRow)
                 {
                     location++;
@@ -186,18 +214,24 @@ namespace OFParser
         }
         private void bearingDataStore(string[] data)
         {
-            location = location + 4;
+            location += 4;
             int pointer = location;
             while(data[pointer].Substring(0,6)!="  Max.")
             {
                 pointer++;
             }
-            double MaxProtrusion = Convert.ToDouble(data[pointer].Substring(47));
-            bool OnlyFast = booleanMaker(data[pointer + 1].Substring(56));
-            BearingDataBlock = new BearingData(MaxProtrusion, OnlyFast,JointDataBlock.Nodes.Count());
+            double maxProtrusionOfSupportingFastenerInches = Convert.ToDouble(data[pointer].Substring(47));
+            bool onlyFastenersGreaterThan1AndAHalfInMultiPlySupportingMember = booleanMaker(data[pointer + 1].Substring(56));
+            BearingDataBlock = new BearingData(maxProtrusionOfSupportingFastenerInches, onlyFastenersGreaterThan1AndAHalfInMultiPlySupportingMember,JointDataBlock.Nodes.Count());
+            
             while (location < pointer)
             {
-                if (BearingDataBlock.Bearings.Count() == Convert.ToInt32(data[location].Substring(4, 2)))
+                //this setup adds Joints to each Bearing. This is because I noticed that each bearing
+                //only had one line where the values beyond Joint# and Type are shown, so to make things
+                //simpler, I put the multiple joints in each bearing. The line with the extra information
+                //always seems to be the first of the bearing, so if we need to line that information up
+                //with the correct joint/type, then it would be JointType[0] in a bearing
+                if (data[location].Count()>26)
                 {
                     BearingDataBlock.AddBearing(data[location]);
                 }
@@ -220,6 +254,7 @@ namespace OFParser
             double DurationFactor = Convert.ToDouble(data[location + 5].Substring(34, 10));
             double Spacing = Convert.ToDouble(data[location + 6].Substring(34, 10));
             int NumberOfPlys = Convert.ToInt32(data[location + 7].Substring(33, 2));
+            //WindLoading...unsure what on earth this is, so stored as string
             string WindLoading = data[location + 8].Substring(34);
             DefaultInfoBlock = new DefaultLoadingInfo(Description,TCLiveLoad,TCDeadLoad,BCDeadLoad,BCLiveLoad,DurationFactor,Spacing,NumberOfPlys,WindLoading);
             location = location + 13;
@@ -227,14 +262,18 @@ namespace OFParser
         private void loadCases(string[] data)
         {
             LoadCases = new List<LoadCase>();
+            //this null LoadCase is loaded in so that the reference number in the list matches the original OF file
             LoadCase current = null;
             LoadCases.Add(current);
+            //since the load cases run through to the end, this is in place to prevent overrunning the end
             while (location < data.Count())
             {
-                LoadCase cur = new LoadCase(location);
-                location=cur.createData(data);
-                LoadCases.Add(cur);
-                location = location + 3;
+                LoadCase newLoadCase = new LoadCase(location);
+                //the createData method is called here rather than in LoadCase because the program
+                //needs to know where location is moved to after storing this Case's info, since the 
+                //length is variable, so it returns the amount that location has moved
+                location=newLoadCase.createData(data)+3;
+                LoadCases.Add(newLoadCase);
             }
                
         }
@@ -302,10 +341,6 @@ namespace OFParser
             }
             Console.Out.Write("Something wrong");
             return 15;
-        }
-        public static void Main(string[] args)
-        {
-            OFParser fred = new OFParser("C:/Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T385.OF");
         }
     }
 }

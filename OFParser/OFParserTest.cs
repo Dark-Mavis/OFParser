@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    using NUnit.Framework;
+using NUnit.Framework;
+using OFParser.Properties;
+
 namespace OFParser
 {
     [TestFixture]
     class OFParserTest
     {
-        OFParser T20 = new OFParser("C: /Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T20.OF");
-        OFParser T1 = new OFParser("C: /Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T1.OF");
-        OFParser T385 = new OFParser("C: /Users/Cerullium/OneDrive/Work/OFParser/OF Parser/OF_File_Examples/T385.OF");
+        OFParser T20 = new OFParser(Encoding.UTF8.GetString(Resources.T20));
+        OFParser T1 = new OFParser(Encoding.UTF8.GetString(Resources.T1));
+        OFParser T385 = new OFParser(Encoding.UTF8.GetString(Resources.T385));
         [Test]
-        public void T20BaseNMiscDataTest()
+        public void T20BaseAndMiscDataTest()
         {
             Assert.AreEqual("16.01.00.0327.15", T20.Version);
             DateTime check = new DateTime(2017, 2, 9, 16, 34, 14);
@@ -28,7 +30,7 @@ namespace OFParser
             Assert.AreEqual(true, T20.MiscDataBlock.TCSheathingStatus);
         }
         [Test]
-        public void T1BaseNMiscDataTest()
+        public void T1BaseAndMiscDataTest()
         {
             Assert.AreEqual("K-H6", T1.TrussDescription);
             Assert.AreEqual("IBC 2012\\TPI 2007", T1.MiscDataBlock.DesignCode);
@@ -57,7 +59,7 @@ namespace OFParser
             Assert.AreEqual(false, T385.MiscDataBlock.PlasterCeiling);
         }
         [Test]
-        public void T20MiscNJointDataTest()
+        public void T20MiscAndJointDataTest()
         {
             Assert.AreEqual("None", T20.MiscDataBlock.SY42SquareCutWebCalcs);
             Assert.AreEqual(false, T20.MiscDataBlock.AllowBoltsOnGirders);
@@ -72,7 +74,7 @@ namespace OFParser
             Assert.AreEqual(0.263, T20.JointDataBlock.Nodes[0].XCoord);
         }
         [Test]
-        public void T1MiscNJointDataTest()
+        public void T1MiscAndJointDataTest()
         {
             Assert.AreEqual(29.938, T1.JointDataBlock.Nodes[1].YCoord);
             Assert.AreEqual(5, T1.JointDataBlock.Nodes[2].Description);
@@ -134,7 +136,7 @@ namespace OFParser
             Assert.AreEqual(656.161, T1.PlateInfoBlock.ZeroShear);
         }
         [Test]
-        public void T385PlateInfoNDataTest()
+        public void T385PlateInfoAndPlateDataTest()
         {
             Assert.AreEqual(567.585, T385.PlateInfoBlock.NinetyShear);
             Assert.AreEqual(2, T385.PlateDataBlock.Plates[0].Node);
@@ -184,13 +186,14 @@ namespace OFParser
         [Test]
         public void T20QualityContTest()
         {
-            Assert.AreEqual("WAVE", T20.QualityControlToothCountsBlock.Joints[3].PlateType);
-            Assert.AreEqual(4, T20.QualityControlToothCountsBlock.Joints[6].Teeths[0].MemberNumber);
-            Assert.AreEqual(13, T20.QualityControlToothCountsBlock.Joints[8].Teeths[0].RequiredTeeth);
-            Assert.AreEqual(59, T20.QualityControlToothCountsBlock.Joints[10].Teeths[0].AvailableTeeth);
-            Assert.AreEqual(8, T20.QualityControlToothCountsBlock.Joints[13].Teeths[1].MemberNumber);
-            Assert.AreEqual(10, T20.QualityControlToothCountsBlock.Joints[17].Teeths[1].RequiredTeeth);
-            Assert.AreEqual(25, T20.QualityControlToothCountsBlock.Joints[13].Teeths[1].AvailableTeeth);
+            Assert.AreEqual(8, T20.QualityControlToothCountsBlock.Joints[2].JointNumber);
+            Assert.AreEqual("WAVE", T20.QualityControlToothCountsBlock.Joints[0].PlateType);
+            Assert.AreEqual(4, T20.QualityControlToothCountsBlock.Joints[1].Teeths[0].MemberNumber);
+            Assert.AreEqual(13, T20.QualityControlToothCountsBlock.Joints[2].Teeths[0].RequiredTeeth);
+            Assert.AreEqual(59, T20.QualityControlToothCountsBlock.Joints[3].Teeths[0].AvailableTeeth);
+            Assert.AreEqual(8, T20.QualityControlToothCountsBlock.Joints[4].Teeths[1].MemberNumber);
+            Assert.AreEqual(10, T20.QualityControlToothCountsBlock.Joints[5].Teeths[1].RequiredTeeth);
+            Assert.AreEqual(25, T20.QualityControlToothCountsBlock.Joints[4].Teeths[1].AvailableTeeth);
         }
         [Test]
         public void T1QualityContTest()
@@ -206,13 +209,13 @@ namespace OFParser
         [Test]
         public void T385QualityContTest()
         {
-            Assert.AreEqual("WAVE", T385.QualityControlToothCountsBlock.Joints[2].PlateType);
-            Assert.AreEqual(4, T385.QualityControlToothCountsBlock.Joints[5].Teeths[0].MemberNumber);
-            Assert.AreEqual(12, T385.QualityControlToothCountsBlock.Joints[6].Teeths[0].RequiredTeeth);
-            Assert.AreEqual(32, T385.QualityControlToothCountsBlock.Joints[10].Teeths[0].AvailableTeeth);
-            Assert.AreEqual(3, T385.QualityControlToothCountsBlock.Joints[12].Teeths[1].MemberNumber);
-            Assert.AreEqual(3, T385.QualityControlToothCountsBlock.Joints[10].Teeths[1].RequiredTeeth);
-            Assert.AreEqual(38, T385.QualityControlToothCountsBlock.Joints[6].Teeths[1].AvailableTeeth);
+            Assert.AreEqual("WAVE", T385.QualityControlToothCountsBlock.Joints[0].PlateType);
+            Assert.AreEqual(4, T385.QualityControlToothCountsBlock.Joints[1].Teeths[0].MemberNumber);
+            Assert.AreEqual(12, T385.QualityControlToothCountsBlock.Joints[2].Teeths[0].RequiredTeeth);
+            Assert.AreEqual(32, T385.QualityControlToothCountsBlock.Joints[3].Teeths[0].AvailableTeeth);
+            Assert.AreEqual(3, T385.QualityControlToothCountsBlock.Joints[4].Teeths[1].MemberNumber);
+            Assert.AreEqual(3, T385.QualityControlToothCountsBlock.Joints[3].Teeths[1].RequiredTeeth);
+            Assert.AreEqual(38, T385.QualityControlToothCountsBlock.Joints[2].Teeths[1].AvailableTeeth);
         }
         [Test]
         public void T20MemberDataTest()
@@ -253,87 +256,90 @@ namespace OFParser
         [Test]
         public void T20LumberDataTest()
         {
-            Assert.AreEqual(7, T20.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T20.LumberDataBlock.Lumbers[7].DepthInches);
-            Assert.AreEqual(1.50, T20.LumberDataBlock.Lumbers[17].ThickInches);
-            Assert.AreEqual("STACKED CHORD FICT MEMBER", T20.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T20.LumberDataBlock.Lumbers[17].EPSI);
-            Assert.AreEqual(1100, T20.LumberDataBlock.Lumbers[7].FbPSI);
-            Assert.AreEqual(850, T20.LumberDataBlock.Lumbers[6].FcPSI);
-            Assert.AreEqual(675, T20.LumberDataBlock.Lumbers[7].FtPSI);
-            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[17].FcpPSI);
-            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[18].FvPSI);
-            Assert.AreEqual(MSR.F, T20.LumberDataBlock.Lumbers[17].MSR);
-            Assert.AreEqual(CW.CW, T20.LumberDataBlock.Lumbers[7].CW);
-            Assert.AreEqual("2x4", T20.LumberDataBlock.Lumbers[6].SizeName);
+            Assert.AreEqual(7, T20.LumberDataBlock.Lumbers[0].Grade);
+            Assert.AreEqual(3.50, T20.LumberDataBlock.Lumbers[1].DepthInches);
+            Assert.AreEqual(1.50, T20.LumberDataBlock.Lumbers[2].ThickInches);
+            Assert.AreEqual("STACKED CHORD FICT MEMBER", T20.LumberDataBlock.Lumbers[3].Description);
+            Assert.AreEqual(1000000, T20.LumberDataBlock.Lumbers[2].EPSI);
+            Assert.AreEqual(1100, T20.LumberDataBlock.Lumbers[1].FbPSI);
+            Assert.AreEqual(850, T20.LumberDataBlock.Lumbers[0].FcPSI);
+            Assert.AreEqual(675, T20.LumberDataBlock.Lumbers[1].FtPSI);
+            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[2].FcpPSI);
+            Assert.AreEqual(0, T20.LumberDataBlock.Lumbers[3].FvPSI);
+            Assert.AreEqual(MSR.F, T20.LumberDataBlock.Lumbers[2].MSR);
+            Assert.AreEqual(CW.CW, T20.LumberDataBlock.Lumbers[1].CW);
+            Assert.AreEqual("2x4", T20.LumberDataBlock.Lumbers[0].SizeName);
         }
         [Test]
         public void T1LumberDataTest()
         {
-            Assert.AreEqual(7, T1.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T1.LumberDataBlock.Lumbers[8].DepthInches);
-            Assert.AreEqual(1.50, T1.LumberDataBlock.Lumbers[17].ThickInches);
-            Assert.AreEqual("STACKED CHORD FICT MEMBER", T1.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T1.LumberDataBlock.Lumbers[17].EPSI);
-            Assert.AreEqual(1500, T1.LumberDataBlock.Lumbers[8].FbPSI);
-            Assert.AreEqual(850, T1.LumberDataBlock.Lumbers[6].FcPSI);
-            Assert.AreEqual(1000, T1.LumberDataBlock.Lumbers[8].FtPSI);
-            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[17].FcpPSI);
-            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[18].FvPSI);
-            Assert.AreEqual(MSR.F, T1.LumberDataBlock.Lumbers[17].MSR);
-            Assert.AreEqual(CW.CW, T1.LumberDataBlock.Lumbers[8].CW);
-            Assert.AreEqual("2x4", T1.LumberDataBlock.Lumbers[6].SizeName);
+            Assert.AreEqual(7, T1.LumberDataBlock.Lumbers[0].Grade);
+            Assert.AreEqual(3.50, T1.LumberDataBlock.Lumbers[1].DepthInches);
+            Assert.AreEqual(1.50, T1.LumberDataBlock.Lumbers[2].ThickInches);
+            Assert.AreEqual("STACKED CHORD FICT MEMBER", T1.LumberDataBlock.Lumbers[3].Description);
+            Assert.AreEqual(1000000, T1.LumberDataBlock.Lumbers[2].EPSI);
+            Assert.AreEqual(1500, T1.LumberDataBlock.Lumbers[1].FbPSI);
+            Assert.AreEqual(850, T1.LumberDataBlock.Lumbers[0].FcPSI);
+            Assert.AreEqual(1000, T1.LumberDataBlock.Lumbers[1].FtPSI);
+            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[2].FcpPSI);
+            Assert.AreEqual(0, T1.LumberDataBlock.Lumbers[3].FvPSI);
+            Assert.AreEqual(MSR.F, T1.LumberDataBlock.Lumbers[2].MSR);
+            Assert.AreEqual(CW.CW, T1.LumberDataBlock.Lumbers[1].CW);
+            Assert.AreEqual("2x4", T1.LumberDataBlock.Lumbers[0].SizeName);
         }
         [Test]
         public void T385LumberDataTest()
         {
-            Assert.AreEqual(7, T385.LumberDataBlock.Lumbers[6].Grade);
-            Assert.AreEqual(3.50, T385.LumberDataBlock.Lumbers[7].DepthInches);
-            Assert.AreEqual(1.50, T385.LumberDataBlock.Lumbers[17].ThickInches);
-            Assert.AreEqual("STACKED CHORD FICT MEMBER", T385.LumberDataBlock.Lumbers[18].Description);
-            Assert.AreEqual(1000000, T385.LumberDataBlock.Lumbers[17].EPSI);
-            Assert.AreEqual(1100, T385.LumberDataBlock.Lumbers[7].FbPSI);
-            Assert.AreEqual(850, T385.LumberDataBlock.Lumbers[6].FcPSI);
-            Assert.AreEqual(675, T385.LumberDataBlock.Lumbers[7].FtPSI);
-            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[17].FcpPSI);
-            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[18].FvPSI);
-            Assert.AreEqual(MSR.F, T385.LumberDataBlock.Lumbers[17].MSR);
-            Assert.AreEqual(CW.CW, T385.LumberDataBlock.Lumbers[7].CW);
-            Assert.AreEqual("2x4", T385.LumberDataBlock.Lumbers[6].SizeName);
+            Assert.AreEqual(7, T385.LumberDataBlock.Lumbers[0].Grade);
+            Assert.AreEqual(3.50, T385.LumberDataBlock.Lumbers[1].DepthInches);
+            Assert.AreEqual(1.50, T385.LumberDataBlock.Lumbers[2].ThickInches);
+            Assert.AreEqual("STACKED CHORD FICT MEMBER", T385.LumberDataBlock.Lumbers[3].Description);
+            Assert.AreEqual(1000000, T385.LumberDataBlock.Lumbers[2].EPSI);
+            Assert.AreEqual(1100, T385.LumberDataBlock.Lumbers[1].FbPSI);
+            Assert.AreEqual(850, T385.LumberDataBlock.Lumbers[0].FcPSI);
+            Assert.AreEqual(675, T385.LumberDataBlock.Lumbers[1].FtPSI);
+            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[2].FcpPSI);
+            Assert.AreEqual(0, T385.LumberDataBlock.Lumbers[3].FvPSI);
+            Assert.AreEqual(MSR.F, T385.LumberDataBlock.Lumbers[2].MSR);
+            Assert.AreEqual(CW.CW, T385.LumberDataBlock.Lumbers[1].CW);
+            Assert.AreEqual("2x4", T385.LumberDataBlock.Lumbers[0].SizeName);
         }
         [Test]
         public void T20BearingDataTest()
         {
-            Assert.AreEqual(Type.Pin, T20.BearingDataBlock.Bearings[1].Joints[0]);
-            Assert.AreEqual(1.594, T20.BearingDataBlock.Bearings[2].WidthInches);
-            Assert.AreEqual(0, T20.BearingDataBlock.Bearings[1].XCoord);
-            Assert.AreEqual(39.651, T20.BearingDataBlock.Bearings[2].YCoord);
-            Assert.AreEqual(2, T20.BearingDataBlock.Bearings[1].BearingType);
-            Assert.AreEqual("Rigid Surface", T20.BearingDataBlock.Bearings[2].WallSpecies);
+            Assert.AreEqual(0, T20.BearingDataBlock.Bearings[0].Joints[0].JointNumber);
+            Assert.AreEqual(Type.Pin, T20.BearingDataBlock.Bearings[0].Joints[0].Type);
+            Assert.AreEqual(1.594, T20.BearingDataBlock.Bearings[1].WidthInches);
+            Assert.AreEqual(0, T20.BearingDataBlock.Bearings[0].XCoord);
+            Assert.AreEqual(39.651, T20.BearingDataBlock.Bearings[1].YCoord);
+            Assert.AreEqual(2, T20.BearingDataBlock.Bearings[0].BearingType);
+            Assert.AreEqual("Rigid Surface", T20.BearingDataBlock.Bearings[1].WallSpecies);
             Assert.AreEqual(99.000, T20.BearingDataBlock.MaxProtrusionOfSupportingFastener);
             Assert.AreEqual(false, T20.BearingDataBlock.OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember);
         }
         [Test]
         public void T1BearingDataTest()
         {
-            Assert.AreEqual(Type.Pin, T1.BearingDataBlock.Bearings[1].Joints[1]);
-            Assert.AreEqual(1.500, T1.BearingDataBlock.Bearings[2].WidthInches);
-            Assert.AreEqual(0, T1.BearingDataBlock.Bearings[1].XCoord);
-            Assert.AreEqual(29.792, T1.BearingDataBlock.Bearings[2].YCoord);
-            Assert.AreEqual(2, T1.BearingDataBlock.Bearings[1].BearingType);
-            Assert.AreEqual("Rigid Surface", T1.BearingDataBlock.Bearings[2].WallSpecies);
+            Assert.AreEqual(1, T1.BearingDataBlock.Bearings[0].Joints[0].JointNumber);
+            Assert.AreEqual(Type.Pin, T1.BearingDataBlock.Bearings[0].Joints[0].Type);
+            Assert.AreEqual(1.500, T1.BearingDataBlock.Bearings[1].WidthInches);
+            Assert.AreEqual(0, T1.BearingDataBlock.Bearings[0].XCoord);
+            Assert.AreEqual(29.792, T1.BearingDataBlock.Bearings[1].YCoord);
+            Assert.AreEqual(2, T1.BearingDataBlock.Bearings[0].BearingType);
+            Assert.AreEqual("Rigid Surface", T1.BearingDataBlock.Bearings[1].WallSpecies);
             Assert.AreEqual(99.000, T1.BearingDataBlock.MaxProtrusionOfSupportingFastener);
             Assert.AreEqual(false, T1.BearingDataBlock.OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember);
         }
         [Test]
         public void T385BearingDataTest()
         {
-            Assert.AreEqual(Type.Roll, T385.BearingDataBlock.Bearings[1].Joints[2]);
-            Assert.AreEqual(1.500, T385.BearingDataBlock.Bearings[1].WidthInches);
-            Assert.AreEqual(0, T385.BearingDataBlock.Bearings[1].XCoord);
-            Assert.AreEqual(32.163, T385.BearingDataBlock.Bearings[1].YCoord);
-            Assert.AreEqual(2, T385.BearingDataBlock.Bearings[1].BearingType);
-            Assert.AreEqual("Rigid Surface", T385.BearingDataBlock.Bearings[1].WallSpecies);
+            Assert.AreEqual(2, T385.BearingDataBlock.Bearings[0].Joints[1].JointNumber);
+            Assert.AreEqual(Type.Roll, T385.BearingDataBlock.Bearings[0].Joints[2].Type);
+            Assert.AreEqual(1.500, T385.BearingDataBlock.Bearings[0].WidthInches);
+            Assert.AreEqual(0, T385.BearingDataBlock.Bearings[0].XCoord);
+            Assert.AreEqual(32.163, T385.BearingDataBlock.Bearings[0].YCoord);
+            Assert.AreEqual(2, T385.BearingDataBlock.Bearings[0].BearingType);
+            Assert.AreEqual("Rigid Surface", T385.BearingDataBlock.Bearings[0].WallSpecies);
             Assert.AreEqual(99.000, T385.BearingDataBlock.MaxProtrusionOfSupportingFastener);
             Assert.AreEqual(false, T385.BearingDataBlock.OnlyFastenersGreaterThanOnePointFiveInchesInMultiPlySupportingMember);
         }
@@ -360,7 +366,7 @@ namespace OFParser
             Assert.AreEqual(15.19, T1.LoadCases[2].UniformLoadsBlock.Loads[3].EndXFeet);
             Assert.AreEqual(24.79, T1.LoadCases[2].UniformLoadsBlock.Loads[2].EndYFeet);
             Assert.AreEqual(7.7, T1.LoadCases[2].UniformLoadsBlock.Loads[1].MagnitudeEndPLF);
-            Assert.AreEqual(0, T1.LoadCases[2].UniformLoadsBlock.Loads[0].LiveLoad);
+            Assert.AreEqual(false, T1.LoadCases[2].UniformLoadsBlock.Loads[0].LiveLoad);
         }
         [Test]
         public void T385Case3ReactionDataTest()
@@ -456,7 +462,7 @@ namespace OFParser
             Assert.AreEqual(8.59, T20.LoadCases[11].UniformLoadsBlock.Loads[3].EndXFeet);
             Assert.AreEqual(46.52, T20.LoadCases[11].UniformLoadsBlock.Loads[4].EndYFeet);
             Assert.AreEqual(20, T20.LoadCases[11].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
-            Assert.AreEqual(1, T20.LoadCases[11].UniformLoadsBlock.Loads[4].LiveLoad);
+            Assert.AreEqual(true, T20.LoadCases[11].UniformLoadsBlock.Loads[4].LiveLoad);
         }
         [Test]
         public void T1Case12ReactionDataTest()
@@ -472,14 +478,15 @@ namespace OFParser
         [Test]
         public void T385Case13CSIDataTest()
         {
+            Assert.AreEqual(7, T385.LoadCases[13].CSIDataBlock.Members[6].MemberNumber);
             Assert.AreEqual(0, T385.LoadCases[13].CSIDataBlock.Members[0].AX);
             Assert.AreEqual(0.023, T385.LoadCases[13].CSIDataBlock.Members[1].BD);
             Assert.AreEqual(0.020, T385.LoadCases[13].CSIDataBlock.Members[2].Total);
             Assert.AreEqual(1.7, T385.LoadCases[13].CSIDataBlock.Members[3].LocMaxFeet);
             Assert.AreEqual(7.29, T385.LoadCases[13].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(.731, T385.LoadCases[13].CSIDataBlock.Members[5].Ke);
-            Assert.AreEqual(1.1, T385.LoadCases[13].CSIDataBlock.Members[7].RAF);
-            Assert.AreEqual(1.15, T385.LoadCases[13].CSIDataBlock.Members[10].RBF);
+            Assert.AreEqual(1.1, T385.LoadCases[13].CSIDataBlock.Members[6].RAF);
+            Assert.AreEqual(1.15, T385.LoadCases[13].CSIDataBlock.Members[7].RBF);
         }
         [Test]
         public void T20Case14CSIShearDataTest()
@@ -569,7 +576,7 @@ namespace OFParser
             Assert.AreEqual(0.77, T20.LoadCases[20].UniformLoadsBlock.Loads[3].EndXFeet);
             Assert.AreEqual(46.52, T20.LoadCases[20].UniformLoadsBlock.Loads[4].EndYFeet);
             Assert.AreEqual(10.1, T20.LoadCases[20].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
-            Assert.AreEqual(1.00, T20.LoadCases[20].UniformLoadsBlock.Loads[6].LiveLoad);
+            Assert.AreEqual(true, T20.LoadCases[20].UniformLoadsBlock.Loads[6].LiveLoad);
         }
         [Test]
         public void T1Case21ReactionDataTest()
@@ -591,8 +598,8 @@ namespace OFParser
             Assert.AreEqual(1.7, T385.LoadCases[22].CSIDataBlock.Members[3].LocMaxFeet);
             Assert.AreEqual(7.29, T385.LoadCases[22].CSIDataBlock.Members[4].LenInches);
             Assert.AreEqual(.731, T385.LoadCases[22].CSIDataBlock.Members[5].Ke);
-            Assert.AreEqual(1.1, T385.LoadCases[22].CSIDataBlock.Members[7].RAF);
-            Assert.AreEqual(1.15, T385.LoadCases[22].CSIDataBlock.Members[10].RBF);
+            Assert.AreEqual(1.1, T385.LoadCases[22].CSIDataBlock.Members[6].RAF);
+            Assert.AreEqual(1.15, T385.LoadCases[22].CSIDataBlock.Members[7].RBF);
         }
         [Test]
         public void T20Case23CSIShearDataTest()
@@ -667,7 +674,7 @@ namespace OFParser
             Assert.AreEqual(1.84, T385.LoadCases[29].UniformLoadsBlock.Loads[3].EndXFeet);
             Assert.AreEqual(36.41, T385.LoadCases[29].UniformLoadsBlock.Loads[4].EndYFeet);
             Assert.AreEqual(-84.2, T385.LoadCases[29].UniformLoadsBlock.Loads[5].MagnitudeEndPLF);
-            Assert.AreEqual(0, T385.LoadCases[29].UniformLoadsBlock.Loads[6].LiveLoad);
+            Assert.AreEqual(false, T385.LoadCases[29].UniformLoadsBlock.Loads[6].LiveLoad);
         }
         [Test]
         public void T20Case30ReactionDataTest()

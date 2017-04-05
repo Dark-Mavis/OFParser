@@ -33,9 +33,9 @@ namespace OFParser
         public DeflectionPPData DeflectionPPDataBlock { get; set; }
         public DeflectionMPData DeflectionMPDataBlock { get; set; }
         public ForceData ForceDataBlock { get; set; }
-        public LoadCase(int locationin)
+        public LoadCase(int location)
         {
-            location = locationin;
+            this.location = location;
         }
         public Distance Spacing
         {
@@ -48,10 +48,13 @@ namespace OFParser
                 this.SpacingFeet = value.ValueInFeet;
             }
         }
+        //this method has a return int because the loop in OFParser making LoadCases
+        //need to know how much the location has moved
         public int createData(string[] data)
         {
             LoadCaseType = data[location].Substring(10);
             SpacingFeet = Convert.ToDouble(data[location+1].Substring(31, 4));
+            //is DurationFactor something that can be stored as a unit type?
             DurationFactor = Convert.ToDouble(data[location+2].Substring(31, 4));
             PlateDurationFactor = Convert.ToDouble(data[location + 3].Substring(31, 4));
             NumberOfPlys = Convert.ToInt32(data[location + 4].Substring(31));
@@ -60,6 +63,8 @@ namespace OFParser
             RepetitiveFactorsUsed = booleanMaker(data[location + 7].Substring(31));
             SoffitDeadLoadPSF = Convert.ToDouble(data[location + 8].Substring(30, 4));
             location = location + 9;
+            //this if statement is to check whether the section I have dubbed "ExtraInfo" is in
+            //this LoadCase, as it is in some and not others
             if (data[location] != "")
             {
                 string LoadCaseName = data[location].Substring(2);
@@ -84,12 +89,14 @@ namespace OFParser
             }
             location = location + 4;
             uniformLoadStore(data);
+            //Reaction Data is also variable in appearance
             if(data[location-4]=="REACTION DATA")
             {
                 reactionDataStore(data);
             }
             CSIDataStore(data);
             CSIShearDataStore(data);
+            //Deflection Data is also variable in appearance
             if (data[location - 5] == "DEFLECTION DATA")
             {
                 deflectionDataStore(data);
@@ -114,27 +121,35 @@ namespace OFParser
         private void reactionDataStore(string[] data)
         {
             int pointer = location;
+            //the reason for this boolean is that sometimes a line appears at the end of the reaction data:
+            //***** NOTE: BEARING REACTION EXCEEDS ALLOWABLE *****
+            //so that is stored as a boolean in the reaction data
+            bool bearingReactionExceedsAllowable;
             while (data[pointer] != "")
             {
                 pointer++;
             }
-            ReactionDataBlock = new ReactionData();
+            //this if checks if the above statement appears
             if (data[pointer - 1][8] == '*')
             {
-                while (location<pointer-1)
-                {
-                    ReactionDataBlock.AddBearing(data[location]);
-                    location++;
-                }
-                location=pointer;
+                bearingReactionExceedsAllowable = true;
+                //pointer is altered here so that it doesn't try to read the statement as a bearing
+                pointer--;
             }
             else
             {
-                while (data[location] != "")
-                {
-                    ReactionDataBlock.AddBearing(data[location]);
-                    location++;
-                }
+                bearingReactionExceedsAllowable = false;
+            }
+            ReactionDataBlock = new ReactionData(bearingReactionExceedsAllowable);
+            while (location<pointer)
+            {
+                ReactionDataBlock.AddBearing(data[location]);
+                location++;
+            }
+            if (bearingReactionExceedsAllowable)
+            {
+                //this is to fix the alteration made earlier so that both cases end in the same place
+                location++;
             }
             location = location + 6;
         }
@@ -160,6 +175,8 @@ namespace OFParser
         }
         private void deflectionDataStore(string[] data)
         {
+            //possibly combine these into one DataBlock?
+            //what does MP mean as opposed to PP?
             DeflectionMPDataBlock = new DeflectionMPData();
             DeflectionPPDataBlock = new DeflectionPPData();
             while (data[location] != "")
@@ -182,6 +199,7 @@ namespace OFParser
             {
                 ForceDataBlock.AddMember(data[location]);
                 location++;
+                //this if statement to prevent running over the end of the document
                 if (location == data.Count())
                 {
                     break;

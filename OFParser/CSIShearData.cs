@@ -15,26 +15,24 @@ namespace OFParser
         }
         public void AddMember(string data)
         {
-            while (Convert.ToInt32(data.Substring(6, 2)) > Members.Count())
-            {
-                MemberShear cur = null;
-                Members.Add(cur);
-            }
-            double Actual = Convert.ToDouble(data.Substring(14, 6));
-            int Allowable = Convert.ToInt32(data.Substring(26, 3));
-            double Csi = Convert.ToDouble(data.Substring(33, 5));
-            double Location = Convert.ToDouble(data.Substring(42));
-            Members.Add(new MemberShear(Actual, Allowable, Csi, Location));
+            int memberNumber = Convert.ToInt32(data.Substring(6, 2));
+            double actual = Convert.ToDouble(data.Substring(14, 6));
+            int allowable = Convert.ToInt32(data.Substring(26, 3));
+            double csi = Convert.ToDouble(data.Substring(33, 5));
+            double location = Convert.ToDouble(data.Substring(42));
+            Members.Add(new MemberShear(memberNumber, actual, allowable, csi, location));
         }
     }
     class MemberShear
     {
+        public int MemberNumber { get; set; }
         public double Actual { get; set; }
         public int Allowable { get; set; }
         public double Csi { get; set; }
         public double Location { get; set; }
-        public MemberShear(double Actual,int Allowable,double Csi,double Location)
+        public MemberShear(int MemberNumber,double Actual,int Allowable,double Csi,double Location)
         {
+            this.MemberNumber = MemberNumber;
             this.Actual = Actual;
             this.Allowable = Allowable;
             this.Csi = Csi;

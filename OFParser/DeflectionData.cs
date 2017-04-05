@@ -23,11 +23,13 @@ namespace OFParser
             double XLocation = Convert.ToDouble(data.Substring(9, 5));
             double LiveLoadX = Convert.ToDouble(data.Substring(15, 5));
             double LiveLoadY = Convert.ToDouble(data.Substring(21, 5));
+            //allow falls between the LiveLoad coordinates and the DeadLoad coordinates
             double Allow = Convert.ToDouble(data.Substring(29, 5));
             double DeadLoadX = Convert.ToDouble(data.Substring(35, 5));
             double DeadLoadY = Convert.ToDouble(data.Substring(41, 5));
             double TotalLoadsX = Convert.ToDouble(data.Substring(47, 5));
             double TotalLoadsY = Convert.ToDouble(data.Substring(53, 5));
+            //this is also name Allow, but it falls after the TotalLoads coordinates
             double AllowTotal = Convert.ToDouble(data.Substring(61, 5));
             double Span = Convert.ToDouble(data.Substring(67, 5));
             Deflects.Add(new Deflect(Label, XLocation, LiveLoadX, LiveLoadY, Allow, DeadLoadX, DeadLoadY, TotalLoadsX, TotalLoadsY, AllowTotal, Span));

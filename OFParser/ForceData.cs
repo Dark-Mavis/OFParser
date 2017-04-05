@@ -17,6 +17,7 @@ namespace OFParser
         }
         public void AddMember(string data)
         {
+            //in this case, the members always appear in order starting at 0, so reference number doubles as MemberNumber
             double NegativeEndAxialNumber = Convert.ToDouble(data.Substring(10, 7));
             double NegativeEndShearNumber = Convert.ToDouble(data.Substring(19, 7));
             double NegativeEndMoment = Convert.ToDouble(data.Substring(28, 8));

@@ -26,20 +26,31 @@ namespace OFParser
             double EndX = Convert.ToDouble(data.Substring(35, 5));
             double EndY = Convert.ToDouble(data.Substring(42, 5));
             double MagnitudeEnd = Convert.ToDouble(data.Substring(51, 5));
-            double LiveLoad = Convert.ToDouble(data.Substring(61));
+            bool LiveLoad;
+            if (Convert.ToDouble(data.Substring(61)) == 1)
+            {
+                LiveLoad = true;
+            }
+            else
+            {
+                LiveLoad = false;
+            }
             Loads.Add(new Load(StartX, StartY, MagnitudeStart, EndX, EndY, MagnitudeEnd, LiveLoad));
         }
     }
     class Load
     {
+        //PLF=pounds per linear foot
         public double StartXFeet { get; set; }
         public double StartYFeet { get; set; }
         public double MagnitudeStartPLF { get; set; }
         public double EndXFeet { get; set; }
         public double EndYFeet { get; set; }
         public double MagnitudeEndPLF { get; set; }
-        public double LiveLoad { get; set; }
-        public Load(double StartX,double StartY,double MagnitudeStart,double EndX,double EndY,double MagnitudeEnd,double LiveLoad)
+        //probably a boolean, as it shows either a 1 or a 0 (also Nathan said so)
+        //I'm assuming that 1 is true and 0 is no. Should ask Matt or Nathan
+        public bool LiveLoad { get; set; }
+        public Load(double StartX,double StartY,double MagnitudeStart,double EndX,double EndY,double MagnitudeEnd,bool LiveLoad)
         {
             this.StartXFeet = StartX;
             this.StartYFeet = StartY;

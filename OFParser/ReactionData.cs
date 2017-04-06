@@ -30,8 +30,8 @@ namespace OFParser
             double VerticalAllowableNumber = Convert.ToDouble(data.Substring(26, 9));
             double HorizontalNumber = Convert.ToDouble(data.Substring(37, 13));
             double MomentNumber = Convert.ToDouble(data.Substring(52, 5));
-            double XLocation = 1234567890;
-            double YLocation = 1234567890;
+            double? XLocation=null;
+            double? YLocation=null;
             //this conditional is because in some cases, X and Y Location don't appear
             //should ask Nathan about this
             if (data.Count()>58)
@@ -49,9 +49,9 @@ namespace OFParser
         public double VerticalAllowablePounds { get; set; }
         public double HorizontalPounds { get; set; }
         public double MomentFtPound { get; set; }
-        public double XLocation { get; set; }
-        public double YLocation { get; set; }
-        public BearingCase(int BearingNumber,double VerticalReactionNumber,double VerticalAllowableNumber,double HorizontalNumber,double MomentNumber,double XLocation,double YLocation)
+        public double? XLocation { get; set; }
+        public double? YLocation { get; set; }
+        public BearingCase(int BearingNumber,double VerticalReactionNumber,double VerticalAllowableNumber,double HorizontalNumber,double MomentNumber,double? XLocation,double? YLocation)
         {
             this.BearingNumber = BearingNumber;
             this.VerticalReactionPounds = VerticalReactionNumber;
@@ -65,7 +65,14 @@ namespace OFParser
         {
             get
             {
-                return new Point(new Distance(new Inch(), XLocation), new Distance(new Inch(), YLocation));
+                if (XLocation.HasValue)
+                {
+                    return new Point(new Distance(new Inch(), XLocation), new Distance(new Inch(), YLocation));
+                }
+                else
+                {
+                    return null;
+                }
             }
             set
             {
